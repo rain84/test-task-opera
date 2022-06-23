@@ -10,6 +10,13 @@ module.exports = {
         sans: ['Lato', ...defaultTheme.fontFamily.sans],
       },
     },
+    colors: {
+      primary: '#00D2DF',
+      green: '#00DF81',
+      red: '#FF6174',
+      white: '#fff',
+      elevation: '#c4c4c4',
+    },
+    plugins: [],
   },
-  plugins: [],
 }

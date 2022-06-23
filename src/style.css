@@ -12,11 +12,67 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 @layer base {
   html {
     font-family: Lato, system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .elevation-big {
+		@apply bg-elevation;
+    box-shadow: 0px 8px 32px rgba(3, 78, 120, 0.1);
+  }
+
+  .elevation-small {
+		@apply bg-elevation;
+    box-shadow: 0px 6px 18px rgba(3, 78, 120, 0.15);
+  }
+
+  .elevation-inner {
+		@apply bg-elevation;
+    box-shadow: inset 0px 4px 10px rgba(190, 200, 216, 0.5);
+  }
+
+  .text-app-title {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .text-subtitle-bold {
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-body {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .text-overline {
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .text-title-big {
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 40px;
   }
 }
