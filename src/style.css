@@ -97,6 +97,10 @@ code {
     fill: white;
   }
 
+  .icon-black {
+    fill: black;
+  }
+
   .icon-2x {
     transform: scale(1.5);
   }
