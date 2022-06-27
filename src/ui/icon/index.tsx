@@ -1,3 +1,4 @@
+import { Icon } from './icon.component'
 import { ReactComponent as MenuSvg } from './svg/menu.svg'
 import { ReactComponent as BathtubSvg } from './svg/bathtub.svg'
 import { ReactComponent as BellOffSvg } from './svg/bell-off.svg'
@@ -12,20 +13,6 @@ import { ReactComponent as SofaSvg } from './svg/sofa.svg'
 import { ReactComponent as ThermometerSvg } from './svg/thermometer.svg'
 import { ReactComponent as TorchereSvg } from './svg/torchere.svg'
 import { ReactComponent as Tuning_knobSvg } from './svg/tuning_knob.svg'
-
-type RC = React.FunctionComponent<
-  React.SVGProps<SVGSVGElement> & { title?: string }
->
-
-type Props = { className?: string; onClick?: () => {} }
-const Icon = (Component: RC) => {
-  const HOC = ({ className, onClick }: Props) => (
-    <Component className={`icon ${className}`} onClick={onClick} />
-  )
-  HOC.displayName = 'Icon'
-
-  return HOC
-}
 
 export const Menu = Icon(MenuSvg)
 export const Bathtub = Icon(BathtubSvg)
