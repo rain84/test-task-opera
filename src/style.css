@@ -24,17 +24,17 @@ code {
 
 @layer components {
   .elevation-big {
-		@apply bg-elevation;
+    @apply bg-elevation;
     box-shadow: 0px 8px 32px rgba(3, 78, 120, 0.1);
   }
 
   .elevation-small {
-		@apply bg-elevation;
+    @apply bg-elevation;
     box-shadow: 0px 6px 18px rgba(3, 78, 120, 0.15);
   }
 
   .elevation-inner {
-		@apply bg-elevation;
+    @apply bg-elevation;
     box-shadow: inset 0px 4px 10px rgba(190, 200, 216, 0.5);
   }
 
@@ -74,5 +74,26 @@ code {
     font-weight: 800;
     font-size: 32px;
     line-height: 40px;
+  }
+
+  .icon {
+		box-sizing: content-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+    padding: 6px 8px;
+    fill: #00d2df;
+  }
+
+  .icon-disabled {
+    fill: rgba(0, 0, 0, 0.6);
+  }
+
+  .icon-white {
+    fill: white;
+  }
+
+  .icon-2x {
+    transform: scale(1.5);
   }
 }
