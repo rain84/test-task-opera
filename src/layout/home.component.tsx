@@ -1,9 +1,11 @@
+import { useCallback, useState } from 'react'
+import { Button, IconMenu, User } from 'ui'
+import { Header } from 'features'
+
 export const Home = () => {
   return (
     <div className="page">
-      <header className="h-[var(--app-header-height)] flex justify-between items-center p-[var(--app-padding)]">
-        <h1 className="text-app-title">Household</h1>
-      </header>
+      <Header />
       <main className="flex-1 border-2 border-red">
         <p>Main</p>
       </main>
