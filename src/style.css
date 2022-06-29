@@ -28,17 +28,14 @@ code {
   }
 
   .elevation-big {
-    @apply bg-elevation;
     box-shadow: 0px 8px 32px rgba(3, 78, 120, 0.1);
   }
 
   .elevation-small {
-    @apply bg-elevation;
     box-shadow: 0px 6px 18px rgba(3, 78, 120, 0.15);
   }
 
   .elevation-inner {
-    @apply bg-elevation;
     box-shadow: inset 0px 4px 10px rgba(190, 200, 216, 0.5);
   }
 
@@ -86,22 +83,48 @@ code {
     height: 20px;
     border-radius: 8px;
     padding: 6px 8px;
-    fill: #00d2df;
+		fill: rgba(0, 0, 0, 0.6);
   }
 
-  .icon-disabled {
-    fill: rgba(0, 0, 0, 0.6);
-  }
+	[disabled].group:hover svg{
+		fill: rgba(0, 0, 0, 0.6);
+	}
 
-  .icon-white {
+	[disabled] {
+		@apply hover:border-none
+	}
+
+	/* :hover:not[disabled].icon, :hover:not[disabled] .icon {
+		fill: #00d2df;
+  } */
+
+  .icon-white,
+  .icon-white svg {
     fill: white;
   }
 
-  .icon-black {
+  .icon-black,
+  .icon-black svg {
     fill: black;
   }
 
   .icon-2x {
     transform: scale(1.5);
+  }
+
+  .gradient-cyan {
+    background: linear-gradient(160.35deg, #00ebc1 7.95%, #00bdc9 92.76%);
+  }
+
+  .gradient-blue {
+    background: linear-gradient(160.35deg, #26c8fc 7.95%, #5e76f5 92.76%);
+  }
+
+  .gradient-orange {
+    background: linear-gradient(160.35deg, #ffd875 7.95%, #f43d53 92.76%);
+  }
+
+  .gradient-magenta {
+    background: linear-gradient(160.35deg, #fc6fff 7.95%, #af3df4 92.76%);
   }
 }
