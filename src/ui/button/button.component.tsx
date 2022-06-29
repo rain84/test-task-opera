@@ -1,16 +1,11 @@
-import { useState, useDebugValue } from 'react'
+import { useState } from 'react'
 
-export type ButtonProps = {
-  className?: string
-  children: React.ReactNode
-  key?: string
-
+export type ButtonProps = Component & {
   pressed?: boolean
   pressedClassName?: string
   releasedClassName?: string
 
   disabled?: boolean
-
   onClick?: () => void
 }
 
