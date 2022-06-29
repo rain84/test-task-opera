@@ -1,12 +1,46 @@
-type Props = {
+import { useState, useDebugValue } from 'react'
+
+export type ButtonProps = {
   className?: string
   children: React.ReactNode
-  onClick?: () => {}
+  key?: string
+
+  pressed?: boolean
+  pressedClassName?: string
+  releasedClassName?: string
+
+  disabled?: boolean
+
+  onClick?: () => void
 }
 
-export const Button = ({ className, children, onClick }: Props) => {
+export const Button = ({
+  className,
+  children,
+  pressed = false,
+  pressedClassName = '',
+  releasedClassName = '',
+  onClick,
+  disabled = false,
+  ...rest
+}: ButtonProps) => {
+  const [isPressed, setIsPressed] = useState(pressed)
+  const handleClick = () => {
+    if (disabled) return
+
+    setIsPressed(!isPressed)
+    onClick?.()
+  }
+
   return (
-    <button className={className} onClick={onClick}>
+    <button
+      className={`inline-flex items-center justify-center ${className} ${
+        isPressed ? pressedClassName : releasedClassName
+      }`}
+      onClick={handleClick}
+      disabled={disabled}
+      {...rest}
+    >
       {children}
     </button>
   )
