@@ -28,8 +28,9 @@ export class SvgElement<T extends SVGElement> {
     ) as AttrsArray
 
     attrs.toString = () =>
-      `"${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}"`
-    attrs[Symbol.toPrimitive] = (hint): string | AttrsArray => attrs.toString()
+      `${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}`
+    attrs[Symbol.toPrimitive] = (hint): string | AttrsArray =>
+      `${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}`
 
     return attrs
   }

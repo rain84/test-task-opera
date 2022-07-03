@@ -2,6 +2,7 @@ import { SvgElement } from './svg'
 
 describe('Util', () => {
   describe('class SvgElement', () => {
+		const { stringify } = JSON
     let svg: SvgElement<SVGSVGElement>
 
     beforeEach(() => {
@@ -26,13 +27,15 @@ describe('Util', () => {
 			`)
 
       expect(Array.isArray(cssAttrs)).toBeTruthy()
-      expect(`${cssAttrs}`).toBe('"width:100;height:200;"')
-      expect('' + cssAttrs).toBe('"width:100;height:200;"')
-      expect(cssAttrs.toString()).toBe('"width:100;height:200;"')
-      expect(cssAttrs).toEqual([
-        ['width', '100'],
-        ['height', '200'],
-      ])
+      expect(`${cssAttrs}`).toBe('width:100;height:200;')
+      expect('' + cssAttrs).toBe('width:100;height:200;')
+      expect(cssAttrs.toString()).toBe('width:100;height:200;')
+      expect(stringify(cssAttrs)).toBe(
+        stringify([
+          ['width', '100'],
+          ['height', '200'],
+        ])
+      )
     })
   })
 })
