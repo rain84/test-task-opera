@@ -19,7 +19,7 @@ export class SvgElement<T extends SVGElement> {
     return this.#ref.deref()
   }
 
-  private static cssRegexp = /([\w-]+):\s*"?([\d\w]+)\s*"?;?\s*$/gm
+  private static cssRegexp = /([\w-]+):\s+"?(.+)\b/gm
 
   static css(str: string): AttrsArray {
     const lines = [...(str.matchAll(SvgElement.cssRegexp) ?? [])]
