@@ -23,7 +23,7 @@ export class SvgElement<T extends SVGElement> {
 
   private static regexp = {
     css: /([\w-]+):\s+"?(.+)\b/gm,
-    lineBreaks: /\n+\t+/g,
+    lineBreaks: /\n+\t+(\/\/\s+.*\n\s+)*/g,
   }
 
   static css(str: string): AttrsArray {
@@ -34,13 +34,13 @@ export class SvgElement<T extends SVGElement> {
 
     attrs.toString = () =>
       `${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}`
-    attrs[Symbol.toPrimitive] = (hint): string | AttrsArray =>
+    attrs[Symbol.toPrimitive] = (): string | AttrsArray =>
       `${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}`
 
     return attrs
   }
 
-  setAttrs(attrs: Attrs) {
+  set attrs(attrs: Attrs) {
     const collection = Array.isArray(attrs) ? attrs : Object.entries(attrs)
     collection.forEach(([attr, value]) => {
       const sanitizedValue = value
@@ -48,12 +48,11 @@ export class SvgElement<T extends SVGElement> {
         .replace(SvgElement.regexp.lineBreaks, '')
       this.#ref.deref()?.setAttribute(attr, sanitizedValue)
     })
-    return this
   }
 
   set style(str: string) {
     const style = SvgElement.css(str).toString()
-    this.setAttrs({ style })
+    this.attrs = { style }
   }
 }
 

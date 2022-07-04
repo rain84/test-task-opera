@@ -40,7 +40,7 @@ describe('Util', () => {
     })
 
     it('should have .setAttrs()', () => {
-      svg.setAttrs({
+      svg.attrs = {
         width: 100,
         height: 200,
         style: SvgElement.css(`
@@ -50,7 +50,7 @@ describe('Util', () => {
 
 					background-color: ${'green'}
       	`),
-      })
+      }
 
       expect(svg.node?.getAttribute('width')).toBe('100')
       expect(svg.node?.getAttribute('height')).toBe('200')
