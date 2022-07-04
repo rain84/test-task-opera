@@ -1,9 +1,11 @@
-interface AttrsArray extends Array<[string, string | number]> {
+type Attr = string | number | AttrsArray
+
+interface AttrsArray extends Array<[string, Attr]> {
   [Symbol.toPrimitive]?: (hint: string) => string | AttrsArray
 }
 
 type AttrsObject = {
-  [K in string]: string | number
+  [K in string]: Attr
 }
 
 export type Attrs = AttrsArray | AttrsObject
@@ -19,10 +21,13 @@ export class SvgElement<T extends SVGElement> {
     return this.#ref.deref()
   }
 
-  private static cssRegexp = /([\w-]+):\s+"?(.+)\b/gm
+  private static regexp = {
+    css: /([\w-]+):\s+"?(.+)\b/gm,
+    lineBreaks: /\n+\t+/g,
+  }
 
   static css(str: string): AttrsArray {
-    const lines = [...(str.matchAll(SvgElement.cssRegexp) ?? [])]
+    const lines = [...(str.matchAll(SvgElement.regexp.css) ?? [])]
     const attrs = lines.map(
       ([_, ...rest]) => rest as [string, string]
     ) as AttrsArray
@@ -37,9 +42,13 @@ export class SvgElement<T extends SVGElement> {
 
   setAttrs(attrs: Attrs) {
     const collection = Array.isArray(attrs) ? attrs : Object.entries(attrs)
-    collection.forEach(([attr, value]) =>
-      this.#ref.deref()?.setAttribute(attr, value as string)
-    )
+    collection.forEach(([attr, value]) => {
+      const sanitizedValue = value
+        .toString()
+        .replace(SvgElement.regexp.lineBreaks, '')
+      this.#ref.deref()?.setAttribute(attr, sanitizedValue)
+    })
+    return this
   }
 
   set style(str: string) {
