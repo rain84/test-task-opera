@@ -24,6 +24,7 @@ export class SvgElement<T extends SVGElement> {
   private static regexp = {
     css: /([\w-]+):\s+"?(.+)\b/gm,
     lineBreaks: /\n+\t+(\/\/\s+.*\n\s+)*/g,
+    camelCase: /([A-Z]?[a-z-]+)/g,
   }
 
   static css(str: string): AttrsArray {
@@ -40,14 +41,34 @@ export class SvgElement<T extends SVGElement> {
     return attrs
   }
 
+  get attrs(): AttrsObject {
+    return (
+      this.node?.getAttributeNames().reduce<AttrsObject>((attrs, name) => {
+        const attr = this.node?.getAttribute(name)
+        if (attr) attrs[name] = attr
+        return attrs
+      }, {}) ?? {}
+    )
+  }
+
   set attrs(attrs: Attrs) {
     const collection = Array.isArray(attrs) ? attrs : Object.entries(attrs)
+    if (!collection.length) return
+
     collection.forEach(([attr, value]) => {
-      const sanitizedValue = value
-        .toString()
-        .replace(SvgElement.regexp.lineBreaks, '')
-      this.#ref.deref()?.setAttribute(attr, sanitizedValue)
+      const sanitized = {
+        value: value.toString().replace(SvgElement.regexp.lineBreaks, ''),
+        attr: attr
+          .match(SvgElement.regexp.camelCase)
+          ?.map((item) => item.toLocaleLowerCase())
+          .join('-')!,
+      }
+      this.node?.setAttribute(sanitized.attr, sanitized.value)
     })
+  }
+
+  get style() {
+    return this.node?.getAttribute('style') ?? ''
   }
 
   set style(str: string) {
