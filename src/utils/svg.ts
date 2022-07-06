@@ -13,7 +13,10 @@ export type Attrs = AttrsArray | AttrsObject
 export class SvgElement<T extends SVGElement> {
   #ref: WeakRef<T>
 
-  constructor(node: T) {
+  constructor(node: Maybe<T>) {
+    if (!node)
+      throw new Error('class SvgElement: passed wrong node object on creation')
+
     this.#ref = new WeakRef(node)
   }
 
@@ -24,7 +27,9 @@ export class SvgElement<T extends SVGElement> {
   private static regexp = {
     css: /([\w-]+):\s+"?(.+)\b/gm,
     lineBreaks: /\n+\t+(\/\/\s+.*\n\s+)*/g,
-    camelCase: /([A-Z]?[a-z-]+)/g,
+
+		//	TODO: maybe should remove?
+		camelCase: /([A-Z]?[a-z-]+)/g,
   }
 
   static css(str: string): AttrsArray {
@@ -56,14 +61,10 @@ export class SvgElement<T extends SVGElement> {
     if (!collection.length) return
 
     collection.forEach(([attr, value]) => {
-      const sanitized = {
-        value: value.toString().replace(SvgElement.regexp.lineBreaks, ''),
-        attr: attr
-          .match(SvgElement.regexp.camelCase)
-          ?.map((item) => item.toLocaleLowerCase())
-          .join('-')!,
-      }
-      this.node?.setAttribute(sanitized.attr, sanitized.value)
+      const sanitizedValue = value
+        .toString()
+        .replace(SvgElement.regexp.lineBreaks, '')
+      this.node?.setAttribute(attr, sanitizedValue)
     })
   }
 

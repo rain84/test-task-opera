@@ -56,8 +56,6 @@ describe('Util', () => {
 
       expect(svg.node?.getAttribute('width')).toBe('100')
       expect(svg.node?.getAttribute('height')).toBe('200')
-      expect(svg.node?.getAttribute('stroke-dasharray')).toBe('0 0')
-      expect(svg.node?.getAttribute('some-camel-cased-prop')).toBe('value')
       expect(svg.node?.style.fill).toBe('yellow')
       expect(svg.node?.style.border).toBe('1px solid')
       expect(svg.node?.style.boxSizing).toBe('content-box')
