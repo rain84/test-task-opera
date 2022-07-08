@@ -1,0 +1,29 @@
+<svg width="136" height="136" viewBox="0 0 136 136" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<style type="text/css">
+		.bg-outer,
+		.arc {
+			cursor: pointer;
+		}
+	</style>
+	<g filter="url(#inset-shadow)">
+		<circle cx="0" cy="68" r="68" fill="white" class='bg bg-outer' />
+	</g>
+	<circle class='bg bg-inner' cx="0" cy="68" r="68" fill="white"
+		style="filter: drop-shadow(0px 4px 5px rgba(190, 200, 216, 0.5))" />
+	<circle class="arc arc-outer" cx="100" cy="100" r="100" stroke-width="1" stroke="#00D2DF" fill="none"
+		stroke-dasharray="0 0">
+	</circle>
+	<circle class="arc arc-inner" cx="100" cy="100" r="100" stroke-width="1" stroke="#00D2DF" opacity=".2" fill="none"
+		stroke-dasharray="0 0">
+	</circle>
+	<defs>
+		<filter id='inset-shadow'>
+			<feOffset dx="0" dy="4" />
+			<feGaussianBlur stdDeviation='5' result='offset-blur' />
+			<feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
+			<feFlood flood-color='#BEC8D8' flood-opacity='.5' result='color' />
+			<feComposite operator='in' in='color' in2='inverse' result='shadow' />
+			<feComposite operator='over' in='shadow' in2='SourceGraphic' />
+		</filter>
+	</defs>
+</svg>
