@@ -5,8 +5,8 @@ type RC = React.FunctionComponent<
 type Props = { className?: string; disabled?: boolean }
 
 export const Icon = (Component: RC) => {
-  const HOC = ({ className }: Props) => (
-    <Component className={`icon ${className}`} />
+  const HOC = ({ className = '' }: Props) => (
+    <Component className={`icon ${className}`.trim()} />
   )
   HOC.displayName = 'Icon'
 
