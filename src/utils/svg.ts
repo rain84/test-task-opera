@@ -28,8 +28,8 @@ export class SvgElement<T extends SVGElement> {
     css: /([\w-]+):\s+"?(.+)\b/gm,
     lineBreaks: /\n+\t+(\/\/\s+.*\n\s+)*/g,
 
-		//	TODO: maybe should remove?
-		camelCase: /([A-Z]?[a-z-]+)/g,
+    //	TODO: maybe should remove?
+    camelCase: /([A-Z]?[a-z-]+)/g,
   }
 
   static css(str: string): AttrsArray {
@@ -39,9 +39,8 @@ export class SvgElement<T extends SVGElement> {
     ) as AttrsArray
 
     attrs.toString = () =>
-      `${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}`
-    attrs[Symbol.toPrimitive] = (): string | AttrsArray =>
-      `${attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')}`
+      attrs.reduce((acc, [key, val]) => acc + `${key}:${val};`, '')
+    attrs[Symbol.toPrimitive] = attrs.toString
 
     return attrs
   }
