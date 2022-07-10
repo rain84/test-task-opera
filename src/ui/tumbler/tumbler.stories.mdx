@@ -1,6 +1,8 @@
 import { useState, useRef, useDeferredValue } from 'react'
 import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
 
+import { ErrorBoundary } from 'features/ErrorBoundary'
+import { IconLeaf } from 'ui/icon'
 import { Tumbler } from './tumbler.component.tsx'
 
 <Meta
@@ -13,40 +15,43 @@ import { Tumbler } from './tumbler.component.tsx'
 
 export const Template = (args) => {
   const node = useRef < HTMLInputElement > null
-  const [value, setValue] = useState(25)
-  // const onChange = useDeferredValue((e) => setValue(+e?.target?.value))
-  // const onChange = useDeferredValue((e) => setValue(+e?.target?.value))
+  const initialValue = 25
+  const [value, setValue] = useState(initialValue)
+  const [min, setMin] = useState(25)
+  const onChangeMin = (e) => setMin(+e?.target?.value)
   return (
     <>
       <div className="flex items-center">
         <Tumbler
-          min={0}
-          max={100}
+          min={min}
+          max={30}
           step={1}
-          value={value}
-          size={140}
-          borderWidth={10}
+          initialValue={initialValue}
           onChange={setValue}
         >
-          <span>{value.toFixed(2)}</span>
+          <div className="flex flex-col justify-between items-center">
+            <IconLeaf />
+            <span className="text-subtitle-bold">{value} kWh</span>
+            <span className="text-subtitle-bold">€ 1.25</span>
+          </div>
         </Tumbler>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={value}
-          readOnly
-          className="ml-4"
-        />
       </div>
     </>
   )
 }
 
 <Canvas>
-  <Story name="Default" args={{}}>
+  <Story
+    name="Default"
+    args={{
+      min: 0,
+      max: 30,
+      step: 1,
+      initialValue: 14,
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable of={Tumbler} />
+<ArgsTable story={Default} />

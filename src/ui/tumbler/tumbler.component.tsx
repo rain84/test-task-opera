@@ -1,147 +1,182 @@
-import { useRef, useEffect, useDeferredValue, useState } from 'react'
+import {
+  useRef,
+  useEffect,
+  useCallback,
+  useState,
+  type MouseEventHandler,
+} from 'react'
 import { SvgElement } from 'utils/svg'
-import { ReactComponent as Svg } from './tumbler.svg'
-import './style.sass'
-
-import type { Circle, TumblerProps, Listner } from './tumbler'
-
+import { canProcess } from 'utils/misc'
+import { SvgComponent } from './svg.component'
+import type { TumblerProps } from './tumbler'
+import { ErrorBoundary } from 'features/ErrorBoundary'
 const QUARTER_RAD = Math.PI / 2
-const PI2 = 2 * Math.PI
+const PI_2 = 2 * Math.PI
+const SIZE = 140
+const BORDER_WIDTH = 12
 
+//	TODO: add ability to scale with "transform: scale"
+//	TODO: implement dragging with the mouse
 export const Tumbler = ({
-  value = 0,
+  initialValue = 0,
   min = 0,
   max = 100,
   step = 1,
-  size = 140,
-  borderWidth = 12,
+
   children,
   onChange,
 }: TumblerProps) => {
-  if (min >= max || step <= 0 || step >= max) throwError('Wrong props')
+  if (min >= max || step <= 0 || step >= max)
+    throwError(`Wrong props. min: ${min}, max: ${max}, step: ${step}`)
 
-  const [val, setVal] = useState(value)
+  const [value, setValue] = useState(adjustValue(initialValue, step))
 
-  const cx = size / 2
-  const cy = size / 2
+  const cx = SIZE / 2
+  const cy = SIZE / 2
+  // let isCapturing = useRef(false)
+  let isSliderClicked = useRef(false)
 
-  let pt: DOMPoint
+  let pt: Maybe<DOMPoint>
+  useEffect(() => {
+    //	eslint-disable-next-line
+    pt = ref.ctx.current?.createSVGPoint()
+  }, [])
 
-  const node = useRef<MaybeNull<SVGSVGElement>>(null)
+  const ref = useRef({
+    ctx: useRef<SVGSVGElement>(null),
+    backgroundOuter: useRef<SVGCircleElement>(null),
+    backgroundInner: useRef<SVGCircleElement>(null),
+    arcOuter: useRef<SVGCircleElement>(null),
+    arcInner: useRef<SVGCircleElement>(null),
+  }).current
 
-  const onClick: EventListener = useDeferredValue((event): void => {
-    const svg = node.current
-    const e: MouseEvent = event as MouseEvent
+  const onClick = useCallback<MouseEventHandler<SVGCircleElement>>(
+    (event): void => {
+      const ctx = ref.ctx.current
 
-    if (!svg) return
-    if (!pt) pt = svg.createSVGPoint()
+      if (!ctx || !pt) return
 
-    pt.x = e.clientX
-    pt.y = e.clientY
+      const e = event as unknown as MouseEvent
+      pt.x = e.clientX
+      pt.y = e.clientY
 
-    const point = pt.matrixTransform(svg.getScreenCTM()?.inverse())
-    const r = Math.sqrt(
-      Math.abs(point.x - cx) ** 2 + Math.abs(point.y - cy) ** 2
-    )
-    const isSliderClicked = (size - 2) / 2 - r <= borderWidth
+      const point = pt.matrixTransform(ctx.getScreenCTM()?.inverse())
+      const r = Math.sqrt(
+        Math.abs(point.x - cx) ** 2 + Math.abs(point.y - cy) ** 2
+      )
+      isSliderClicked.current = (SIZE - 2) / 2 - r <= BORDER_WIDTH
 
-    if (!isSliderClicked) return
+      if (!isSliderClicked.current) return
 
-    const adjacent = Math.abs(point.x - cx)
-    let angle = Math.acos(adjacent / r)
+      const adjacent = Math.abs(point.x - cx)
+      let angle = Math.acos(adjacent / r)
 
-    if (point.x >= cx && point.y <= cy) angle = QUARTER_RAD - angle
-    else if (point.x >= cx && point.y >= cy) angle += QUARTER_RAD
-    else if (point.x <= cx && point.y >= cy) angle = 3 * QUARTER_RAD - angle
-    else if (point.x <= cx && point.y <= cy) angle += 3 * QUARTER_RAD
+      if (point.x >= cx && point.y <= cy) angle = QUARTER_RAD - angle
+      else if (point.x >= cx && point.y >= cy) angle += QUARTER_RAD
+      else if (point.x <= cx && point.y >= cy) angle = 3 * QUARTER_RAD - angle
+      else if (point.x <= cx && point.y <= cy) angle += 3 * QUARTER_RAD
 
-    const next = (angle / PI2) * max
-    setVal(next)
-    onChange?.(next)
-  })
+      const length = (angle * max) / PI_2
+      const next = adjustValue(length, step)
+      setValue(next)
+      onChange?.(next)
+    },
+    [cx, cy, max, onChange, ref.ctx, step, pt]
+  )
 
-  const onMousedown: EventListener = useDeferredValue((event): void => {
-    const svg = node.current
-    const e: MouseEvent = event as MouseEvent
+  /*	TODO: implement later
+  const onMouseDown = useRef(() => {
+    isCapturing.current = true
+    console.log('onMouseDown')
+  }).current
 
-    if (!svg) return
-    if (!pt) pt = svg.createSVGPoint()
+  const onMouseUp = useRef(() => {
+    console.log('onMouseUp')
 
-    pt.x = e.clientX
-    pt.y = e.clientY
+    isCapturing.current = false
+    isSliderClicked.current = false
+  }).current
 
-    const point = pt.matrixTransform(svg.getScreenCTM()?.inverse())
-    const r = Math.sqrt(
-      Math.abs(point.x - cx) ** 2 + Math.abs(point.y - cy) ** 2
-    )
-    const isSliderClicked = (size - 2) / 2 - r <= borderWidth
+  const onMouseMove = useCallback(
+    (event: Event): void => {
+      const ctx = ref.ctx.current
+      console.log('onMouseMove')
 
-    if (!isSliderClicked) return
+      if (!isCapturing.current || !ctx || !pt) return
 
-    const adjacent = Math.abs(point.x - cx)
-    let angle = Math.acos(adjacent / r)
+      const e = event as unknown as MouseEvent
+      pt.x = e.clientX
+      pt.y = e.clientY
 
-    if (point.x >= cx && point.y <= cy) angle = QUARTER_RAD - angle
-    else if (point.x >= cx && point.y >= cy) angle += QUARTER_RAD
-    else if (point.x <= cx && point.y >= cy) angle = 3 * QUARTER_RAD - angle
-    else if (point.x <= cx && point.y <= cy) angle += 3 * QUARTER_RAD
+      const point = pt.matrixTransform(ctx.getScreenCTM()?.inverse())
+      console.log('isSliderClicked', isSliderClicked.current)
 
-    const next = (angle / PI2) * max
-    setVal(next)
-    onChange?.(next)
-  })
+      const r = Math.sqrt(
+        Math.abs(point.x - cx) ** 2 + Math.abs(point.y - cy) ** 2
+      )
+      if (!isSliderClicked.current) return
+
+      const adjacent = Math.abs(point.x - cx)
+      let angle = Math.acos(adjacent / r)
+
+      if (point.x >= cx && point.y <= cy) angle = QUARTER_RAD - angle
+      else if (point.x >= cx && point.y >= cy) angle += QUARTER_RAD
+      else if (point.x <= cx && point.y >= cy) angle = 3 * QUARTER_RAD - angle
+      else if (point.x <= cx && point.y <= cy) angle += 3 * QUARTER_RAD
+
+      const length = (angle * max) / PI_2
+      const next = adjustValue(length, step)
+      console.log(`next`, next)
+      setValue(next)
+      onChange?.(next)
+    },
+    [cx, cy, max, onChange, ref.ctx, step, pt]
+  )
+ */
 
   useEffect(() => {
-    const nodes = {
-      ctx: node.current,
-      backgroundOuter: node?.current?.querySelector('circle.bg-outer'),
-      backgroundInner: node?.current?.querySelector('circle.bg-inner'),
-      arcOuter: node?.current?.querySelector('circle.arc-outer'),
-      arcInner: node?.current?.querySelector('circle.arc-inner'),
-    }
-
-    if (!canProcess(nodes)) throwError('Missing nodes')
+    if (!canProcess(ref)) throwError('Missing nodes')
 
     const svg = {
-      ctx: new SvgElement(node.current),
-      backgroundOuter: new SvgElement<Circle>(nodes.backgroundOuter as Circle),
-      backgroundInner: new SvgElement<Circle>(nodes.backgroundInner as Circle),
-      arcOuter: new SvgElement<Circle>(nodes.arcOuter as Circle),
-      arcInner: new SvgElement<Circle>(nodes.arcInner as Circle),
+      ctx: new SvgElement(ref.ctx.current),
+      backgroundOuter: new SvgElement(ref.backgroundOuter.current),
+      backgroundInner: new SvgElement(ref.backgroundInner.current),
+      arcOuter: new SvgElement(ref.arcOuter.current),
+      arcInner: new SvgElement(ref.arcInner.current),
     }
 
     svg.ctx.attrs = {
-      width: size,
-      height: size,
-      viewBox: `0 0 ${size} ${size}`,
+      width: SIZE,
+      height: SIZE,
+      viewBox: `0 0 ${SIZE} ${SIZE}`,
     }
     svg.ctx.style = `box-sizing: content-box`
 
     svg.backgroundOuter.attrs = { cx, cy }
-    svg.backgroundInner.attrs = { cx, cy, r: size / 2 - borderWidth }
+    svg.backgroundInner.attrs = { cx, cy, r: SIZE / 2 - BORDER_WIDTH }
 
     const arc = {
       outer: { width: 4, length: 0, r: 0, step: 0 },
       inner: { width: 8, length: 0, r: 0, step: 0 },
     }
 
-    arc.outer.r = (size - arc.outer.width) / 2
+    arc.outer.r = (SIZE - arc.outer.width) / 2
     arc.outer.length = 2 * Math.PI * arc.outer.r
-    arc.outer.step = arc.outer.length / 100
+    arc.outer.step = arc.outer.length / max
 
-    arc.inner.r = (size - arc.inner.width - 4) / 2
+    arc.inner.r = (SIZE - arc.inner.width - 4) / 2
     arc.inner.length = 2 * Math.PI * arc.inner.r
-    arc.inner.step = arc.inner.length / 100
+    arc.inner.step = arc.inner.length / max
 
     svg.arcOuter.attrs = {
       cx,
       cy,
       transform: `rotate(-90, ${cx}, ${cy})`,
       r: arc.outer.r,
-      'stroke-dasharray': `${val * arc.outer.step} 9999`,
+      'stroke-dasharray': `${value * arc.outer.step} 9999`,
       'stroke-width': arc.outer.width,
-      width: size,
-      height: size,
+      width: SIZE,
+      height: SIZE,
     }
 
     svg.arcInner.attrs = {
@@ -149,51 +184,39 @@ export const Tumbler = ({
       cy,
       transform: `rotate(-90, ${cx}, ${cy})`,
       r: arc.inner.r,
-      'stroke-dasharray': `${val * arc.inner.step} 9999`,
+      'stroke-dasharray': `${value * arc.inner.step} 9999`,
       'stroke-width': arc.inner.width,
-      width: size,
-      height: size,
+      width: SIZE,
+      height: SIZE,
     }
 
-    //  prettier-ignore
-    return addEventListeners([
-			[
-				'click', onClick,
-				svg.backgroundOuter.node, svg.backgroundInner.node, svg.arcOuter.node, svg.arcInner.node,
-			],
-			[
-				'mousedown', onClick,
-				svg.backgroundOuter.node, svg.backgroundInner.node, svg.arcOuter.node, svg.arcInner.node,
-			],
-		])
-  }, [size, val, borderWidth])
+    /* 		TODO: implement later
+    document.body.addEventListener('mousemove', onMouseMove)
+    document.body.addEventListener('mouseup', onMouseUp)
+    return () => {
+      document.body.removeEventListener('mousemove', onMouseMove)
+      document.body.removeEventListener('mouseup', onMouseUp)
+    }
+ */
+  }, [step, cx, cy, max, onClick, value, ref])
 
   return (
-    <section
-      className={`flex items-center justify-center w-[${size}px] h-[${size}px]`}
-    >
-      <Svg className="absolute tumbler" ref={node} />
+    <section className={`flex items-center justify-center w-[140px] h-[140px]`}>
+      <SvgComponent
+        {...ref}
+        className="absolute tumbler"
+        onClick={onClick}
+        // onMouseDown={onMouseDown}
+      />
       <div className="z-10">{children}</div>
     </section>
   )
 }
 
-function canProcess(obj: Record<string, Maybe<unknown>>) {
-  return Object.values(obj).every((val) => val)
+function adjustValue(value: number, step: number) {
+  return step * Math.ceil(value / step)
 }
 
 function throwError(message: string) {
   throw new Error(`<Thumbler/>: ${message}`)
-}
-
-function addEventListeners(
-  listners: Listner<'click' | 'mousedown' | 'mouseup'>[]
-) {
-  listners.forEach(([type, listener, ...nodes]) =>
-    nodes.forEach((node) => node?.addEventListener(type, listener))
-  )
-  return () =>
-    listners.forEach(([type, listener, ...nodes]) =>
-      nodes.forEach((node) => node?.removeEventListener(type, listener))
-    )
 }
