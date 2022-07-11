@@ -1,8 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 
+import { withErrorBoundary } from 'features/ErrorBoundary'
 import { Home } from 'layout'
 
-export const App = () => (
+const AppComponent = () => (
   <Routes>
     <Route path="/">
       <Route index element={<DefaultRoute />} />
@@ -15,3 +16,5 @@ export const App = () => (
 function DefaultRoute() {
   return <Navigate to={'/home'} replace={true} />
 }
+
+export const App = withErrorBoundary(AppComponent)
