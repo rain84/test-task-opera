@@ -3,14 +3,16 @@ export interface Props {
   reloadable?: boolean
 }
 
+type ErrorStack = MaybeUndefined<string>[]
+
 export interface State {
-  errorStack?: string
+  errorStack?: ErrorStack
   key?: boolean
   someProp?: string
 }
 
 export type ErrorProps = {
-  stack: string
+  stack: ErrorStack
   reloadable: boolean
   onClick: () => void
 }

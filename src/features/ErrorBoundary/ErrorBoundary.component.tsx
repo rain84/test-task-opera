@@ -1,16 +1,14 @@
-import { Component, ErrorInfo, Fragment, createRef } from 'react'
+import { Component, ErrorInfo, Fragment } from 'react'
 import type { ErrorProps, Props, State, ComponentType } from './ErrorBoundary'
 
 export class ErrorBoundary extends Component<Props, State> {
-  #state: State = {
-    errorStack: '',
+  state: State = {
+    errorStack: [],
     key: true,
   }
 
-  #ref = createRef<HTMLDivElement>()
-
   static getDerivedStateFromError(error: Error): State {
-    return { errorStack: error.stack }
+    return { errorStack: [error.stack] }
   }
 
   componentDidMount() {
@@ -26,22 +24,23 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   reload = () => {
-    this.setState(
-      (prev) => ({ errorStack: '', key: !prev.key }),
-      () => console.log('<ErrorBoundary/>. Reload finished')
-    )
+    this.setState((prev) => ({ errorStack: [], key: !prev.key }))
   }
 
-  onError: EventListener = (e) => {
+  onError = (e: ErrorEvent) => {
     e.preventDefault()
-    this.reload()
+    e.stopImmediatePropagation()
+    this.setState((prev) => ({
+      ...prev,
+      errorStack: [...(prev.errorStack ?? []), e?.error.stack],
+    }))
   }
 
   render() {
     const { reloadable = true } = this.props
-    const { errorStack, key } = this.#state
+    const { errorStack, key } = this.state
 
-    return errorStack ? (
+    return errorStack?.length ? (
       <Error stack={errorStack} onClick={this.reload} reloadable={reloadable} />
     ) : (
       <Fragment key={Number(key)}>{this.props.children}</Fragment>
@@ -50,9 +49,9 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 const Error = ({ stack, reloadable = true, onClick }: ErrorProps) => (
-  <section className="flex flex-col items-center justify-start">
+  <section className="flex flex-col items-center justify-start p-20 max-w-fit">
     <div className="flex items-center self-stretch justify-between">
-      <h1>Error Stack</h1>
+      <h1 className="text-2xl font-extrabold">Error Stack</h1>
       {reloadable && (
         <button
           onClick={onClick}
@@ -62,7 +61,13 @@ const Error = ({ stack, reloadable = true, onClick }: ErrorProps) => (
         </button>
       )}
     </div>
-    <pre>{stack}</pre>
+    <div className="mt-4">
+      {stack?.map?.((str) => (
+        <pre className="mb-4 break-words whitespace-pre-wrap last:mb-0">
+          {str}
+        </pre>
+      ))}
+    </div>
   </section>
 )
 
