@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, Fragment } from 'react'
+import { Component, ErrorInfo, Fragment, createRef } from 'react'
 import type { ErrorProps, Props, State, ComponentType } from './ErrorBoundary'
 
 export class ErrorBoundary extends Component<Props, State> {
@@ -7,8 +7,18 @@ export class ErrorBoundary extends Component<Props, State> {
     key: true,
   }
 
+  #ref = createRef<HTMLDivElement>()
+
   static getDerivedStateFromError(error: Error): State {
     return { errorStack: error.stack }
+  }
+
+  componentDidMount() {
+    window.addEventListener('error', this.onError, true)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('error', this.onError)
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -16,7 +26,15 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   reload = () => {
-    this.setState((prev) => ({ errorStack: '', key: !prev.key }))
+    this.setState(
+      (prev) => ({ errorStack: '', key: !prev.key }),
+      () => console.log('<ErrorBoundary/>. Reload finished')
+    )
+  }
+
+  onError: EventListener = (e) => {
+    e.preventDefault()
+    this.reload()
   }
 
   render() {
