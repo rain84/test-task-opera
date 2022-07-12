@@ -14,7 +14,7 @@ export interface State {
 export type ErrorProps = {
   stack: ErrorStack
   reloadable: boolean
-  onClick: () => void
+  onClick: Fn
 }
 
 export type ComponentType<P extends {}> = {

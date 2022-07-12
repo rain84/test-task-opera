@@ -6,7 +6,7 @@ export type ButtonProps = Component & {
   releasedClassName?: string
 
   disabled?: boolean
-  onClick?: () => void
+  onClick?: Fn
 }
 
 export const Button = ({

@@ -1,7 +1,7 @@
 import { Dot } from './dot.component'
 import { ReactComponent as Avatar } from './avatar.svg'
 
-type Props = { className?: string; focus?: boolean; onClick?: () => void }
+type Props = { className?: string; focus?: boolean; onClick?: Fn }
 
 export const User = ({ className, focus = false, onClick }: Props) => (
   <section
