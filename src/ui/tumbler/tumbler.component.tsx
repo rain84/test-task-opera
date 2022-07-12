@@ -154,7 +154,7 @@ export const Tumbler = ({
 
     const arc = {
       outer: { width: 4, length: 0, r: 0, step: 0 },
-      inner: { width: 8, length: 0, r: 0, step: 0 },
+      inner: { width: 10, length: 0, r: 0, step: 0 },
     }
 
     arc.outer.r = (SIZE - arc.outer.width) / 2

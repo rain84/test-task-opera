@@ -33,9 +33,9 @@ export const SvgComponent = ({
 				<circle ref={backgroundOuter as RefObject<SVGCircleElement>} cx="0" cy="68" r="68" fill="white" className='cursor-pointer bg bg-outer' {...handlers}/>
 			</g>
 			<circle ref={backgroundInner as RefObject<SVGCircleElement>} className='cursor-pointer bg bg-inner drop-shadow-[0_4px_5px_rgba(190,200,216,.3)]' cx="0" cy="68" r="68" fill="white"/>
-			<circle ref={arcOuter as RefObject<SVGCircleElement>} className="cursor-pointer arc arc-outer transition-[stroke-dasharray] duration-500" cx="100" cy="100" r="100" strokeWidth="1" stroke="#00D2DF" fill="none"
+			<circle ref={arcOuter as RefObject<SVGCircleElement>} className="cursor-pointer arc arc-outer transition-[stroke-dasharray] duration-500" cx="100" cy="100" r="0" strokeWidth="1" stroke="#00D2DF" fill="none"
 				strokeDasharray="0 0" {...handlers}/>
-			<circle ref={arcInner as RefObject<SVGCircleElement>} className="cursor-pointer arc arc-inner transition-[stroke-dasharray] duration-500" cx="100" cy="100" r="100" strokeWidth="1" stroke="#00D2DF" opacity=".2" fill="none"
+			<circle ref={arcInner as RefObject<SVGCircleElement>} className="cursor-pointer arc arc-inner transition-[stroke-dasharray] duration-500" cx="100" cy="100" r="0" strokeWidth="1" stroke="#00D2DF" opacity=".2" fill="none"
 				strokeDasharray="0 0" {...handlers}/>
 			<defs>
 				<filter id='inset-shadow'>
