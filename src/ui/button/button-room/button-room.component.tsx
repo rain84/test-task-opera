@@ -20,12 +20,12 @@ export const ButtonRoom = ({
 }: ButtonColouredProps) => (
   <Button
     {...props}
-    className="bg-white rounded-2xl"
+    className={`bg-white rounded-2xl ${className}`}
     pressedClassName="elevation-inner"
     releasedClassName="elevation-small"
   >
     <div
-      className={`flex items-center justify-center m-[10px] w-[44px] h-[44px] rounded-lg ${CLASSNAMES[color]} ${className}`}
+      className={`flex items-center justify-center m-[10px] w-[44px] h-[44px] rounded-lg ${CLASSNAMES[color]}`}
     >
       {children}
     </div>
