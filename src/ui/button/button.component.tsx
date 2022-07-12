@@ -29,7 +29,7 @@ export const Button = ({
 
   return (
     <button
-      className={`inline-flex items-center justify-center ${className} ${
+      className={`max-w-fit inline-flex items-center justify-center ${className} ${
         isPressed ? pressedClassName : releasedClassName
       }`}
       onClick={handleClick}
