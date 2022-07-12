@@ -9,7 +9,7 @@ import { SvgElement } from 'utils/svg'
 import { canProcess } from 'utils/misc'
 import { SvgComponent } from './svg.component'
 import type { TumblerProps } from './tumbler'
-import { ErrorBoundary } from 'features/ErrorBoundary'
+
 const QUARTER_RAD = Math.PI / 2
 const PI_2 = 2 * Math.PI
 const SIZE = 140
@@ -36,12 +36,6 @@ export const Tumbler = ({
   // let isCapturing = useRef(false)
   let isSliderClicked = useRef(false)
 
-  let pt: Maybe<DOMPoint>
-  useEffect(() => {
-    //	eslint-disable-next-line
-    pt = ref.ctx.current?.createSVGPoint()
-  }, [])
-
   const ref = useRef({
     ctx: useRef<SVGSVGElement>(null),
     backgroundOuter: useRef<SVGCircleElement>(null),
@@ -50,17 +44,20 @@ export const Tumbler = ({
     arcInner: useRef<SVGCircleElement>(null),
   }).current
 
+  let pt = useRef<DOMPoint>()
+
   const onClick = useCallback<MouseEventHandler<SVGCircleElement>>(
     (event): void => {
       const ctx = ref.ctx.current
 
-      if (!ctx || !pt) return
+      if (!ctx) return
+      if (!pt.current) pt.current = ctx.createSVGPoint()
 
       const e = event as unknown as MouseEvent
-      pt.x = e.clientX
-      pt.y = e.clientY
+      pt.current.x = e.clientX
+      pt.current.y = e.clientY
 
-      const point = pt.matrixTransform(ctx.getScreenCTM()?.inverse())
+      const point = pt.current.matrixTransform(ctx.getScreenCTM()?.inverse())
       const r = Math.sqrt(
         Math.abs(point.x - cx) ** 2 + Math.abs(point.y - cy) ** 2
       )

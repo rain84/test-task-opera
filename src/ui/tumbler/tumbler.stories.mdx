@@ -1,42 +1,29 @@
 import { useState, useRef, useDeferredValue } from 'react'
 import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
 
-import { ErrorBoundary } from 'features/ErrorBoundary'
 import { IconLeaf } from 'ui/icon'
 import { Tumbler } from './tumbler.component.tsx'
 
 <Meta
   title="Tumbler"
   component={Tumbler}
-  decorators={[(story) => <div className="flex p-2 space-x-4">{story()}</div>]}
+  decorators={[
+    (story) => <div className="flex p-2 space-x-4 items-center">{story()}</div>,
+  ]}
 />
 
 # Toggle
 
 export const Template = (args) => {
-  const node = useRef < HTMLInputElement > null
-  const initialValue = 25
-  const [value, setValue] = useState(initialValue)
-  const [min, setMin] = useState(25)
-  const onChangeMin = (e) => setMin(+e?.target?.value)
+  const [value, setValue] = useState(args.initialValue)
   return (
-    <>
-      <div className="flex items-center">
-        <Tumbler
-          min={min}
-          max={30}
-          step={1}
-          initialValue={initialValue}
-          onChange={setValue}
-        >
-          <div className="flex flex-col justify-between items-center">
-            <IconLeaf />
-            <span className="text-subtitle-bold">{value} kWh</span>
-            <span className="text-subtitle-bold">€ 1.25</span>
-          </div>
-        </Tumbler>
+    <Tumbler {...args} onChange={setValue}>
+      <div className="flex flex-col justify-between items-center">
+        <IconLeaf />
+        <span className="text-subtitle-bold">{value} kWh</span>
+        <span className="text-subtitle-bold">€ 1.25</span>
       </div>
-    </>
+    </Tumbler>
   )
 }
 
@@ -54,4 +41,4 @@ export const Template = (args) => {
   </Story>
 </Canvas>
 
-<ArgsTable story={Default} />
+<ArgsTable story="Default" />
