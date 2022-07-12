@@ -6,3 +6,4 @@ declare type Component = {
   children?: React.ReactNode
   key?: string
 }
+declare type Fn = () => void
