@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, Fragment } from 'react'
-import type { ErrorProps, Props, State, ComponentType } from './ErrorBoundary'
+import type { ErrorProps, Props, State, ComponentType } from './error-boundary'
 
 export class ErrorBoundary extends Component<Props, State> {
   state: State = {
