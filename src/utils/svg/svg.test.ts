@@ -1,4 +1,4 @@
-import { SvgElement } from './svg'
+import { SvgElement } from '.'
 
 describe('Util', () => {
   describe('class SvgElement', () => {
