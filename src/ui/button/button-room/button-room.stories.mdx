@@ -5,44 +5,49 @@ import { ButtonRoom } from './index.ts'
 <Meta
   title="Buttons/ButtonRoom"
   component={ButtonRoom}
-	decorators={[(story) => <div className="flex p-2 space-x-4">{story()}</div>]}
+  argTypes={{
+    color: {
+      name: 'color',
+      control: 'select',
+      options: ['cyan', 'blue', 'orange', 'magenta'],
+      defaultValue: 'cyan',
+    },
+  }}
 />
 
-# ButtonMode
+# ButtonRoom
 
 export const Template = (args) => (
-  <>
-		<ButtonRoom color='cyan' {...args}>
-			<Icon.IconSofa className="fill-white" />
-		</ButtonRoom>
-		<ButtonRoom color='blue' {...args}>
-			<Icon.IconPot className="fill-white" />
-		</ButtonRoom>
-		<ButtonRoom color='orange' {...args}>
-			<Icon.IconBulb	 className="fill-white" />
-		</ButtonRoom>
-		<ButtonRoom color='magenta' {...args}>
-			<Icon.IconBathtub className="fill-white" />
-		</ButtonRoom>
-  </>
+  <div className="flex p-2 space-x-4">
+    <ButtonRoom {...args} color="cyan">
+      <Icon.IconSofa className="fill-white" />
+    </ButtonRoom>
+    <ButtonRoom {...args} color="blue">
+      <Icon.IconPot className="fill-white" />
+    </ButtonRoom>
+    <ButtonRoom {...args} color="orange">
+      <Icon.IconBulb className="fill-white" />
+    </ButtonRoom>
+    <ButtonRoom {...args} color="magenta">
+      <Icon.IconBathtub className="fill-white" />
+    </ButtonRoom>
+    <ButtonRoom {...args}>
+      <Icon.IconCog className="fill-white" />
+    </ButtonRoom>
+  </div>
 )
 
 <Canvas>
-	<Story name="Default" args={{ disabled: false }}>
-		{Template.bind({})}
-	</Story>
+  <Story
+    name="Default"
+    args={{
+      pressed: false,
+      disabled: false,
+      className: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
-<Canvas>
-	<Story name="Disabled" args={{ disabled: true }}>
-		{Template.bind({})}
-	</Story>
-</Canvas>
-
-<Canvas>
-	<Story name="Colors" args={{ disabled: true, color: 'magenta' }}>
-		{Template.bind({})}
-	</Story>
-</Canvas>
-
-<ArgsTable of={ButtonRoom} />
+<ArgsTable story="Default" />
