@@ -1,2 +1,2 @@
 export * from './tumbler.component'
-export * from './tumbler'
+export * from './tumbler.types'

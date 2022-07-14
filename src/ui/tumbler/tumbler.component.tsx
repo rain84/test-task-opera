@@ -8,7 +8,7 @@ import {
 import { SvgElement } from 'utils/svg'
 import { canProcess } from 'utils/misc'
 import { SvgComponent } from './svg.component'
-import type { TumblerProps } from './tumbler'
+import type { TumblerProps } from './tumbler.types'
 
 const QUARTER_RAD = Math.PI / 2
 const PI_2 = 2 * Math.PI
