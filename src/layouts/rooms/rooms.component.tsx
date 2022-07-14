@@ -1,17 +1,17 @@
-import { useRef } from 'react'
-import type { ReactNode, SyntheticEvent } from 'react'
+import { useRef, type ReactNode } from 'react'
 
 import { ButtonRoom, type Color } from 'ui/button'
 import { IconSofa, IconPot, IconBulb, IconBathtub } from 'ui/icon'
 import { getParentDatasetProp } from 'utils/misc'
+import { OnClick, RoomProps } from './rooms.types'
 
 export const Rooms = () => {
-  const onClick = useRef((e: SyntheticEvent) => {
+  const onClick = useRef<OnClick>((e, { pressed }) => {
     const label =
       (e?.currentTarget as HTMLElement)?.dataset?.label ??
       getParentDatasetProp(e, 'label') ??
       'Button'
-    alert(`${label} clicked`)
+    alert(`${label} is ${pressed ? 'pressed' : 'released'}`)
   }).current
 
   return (
@@ -33,14 +33,6 @@ export const Rooms = () => {
   )
 }
 
-type RoomProps = {
-  color: Color
-  temperature: number
-  label: string
-  Icon: ReactNode
-  onClick: Fn<SyntheticEvent>
-}
-
 function Room({ color, temperature, label, Icon, onClick }: RoomProps) {
   return (
     <div className="flex flex-col items-center justify-center first:ml-[28px] mr-[34px] last:mr-[28px]">
@@ -58,7 +50,7 @@ function Room({ color, temperature, label, Icon, onClick }: RoomProps) {
   )
 }
 
-function item(...args: [Color, number, string, ReactNode, Fn<SyntheticEvent>]) {
+function item(...args: [Color, number, string, ReactNode, OnClick]) {
   const [color, temperature, label, Icon, onClick] = args
   //	prettier-ignore
   return { color, temperature, label, Icon, onClick, }
