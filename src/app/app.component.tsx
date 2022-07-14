@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { withErrorBoundary } from 'utils/components/error-boundary'
-import { Home } from 'layout'
+import { Home } from 'pages'
 
 const AppComponent = () => (
   <Routes>

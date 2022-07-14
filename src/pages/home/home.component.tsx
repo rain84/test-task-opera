@@ -1,4 +1,4 @@
-import { Header, Rooms } from 'features'
+import { Header, Rooms } from 'layouts'
 
 export const Home = () => (
   <div className="page">
