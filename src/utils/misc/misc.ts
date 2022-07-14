@@ -18,3 +18,14 @@ export const addEventListeners = (
       nodes.forEach((node) => node?.removeEventListener(type, listener))
     )
 }
+
+export const getParentDatasetProp = (e: React.SyntheticEvent, prop: string) => {
+  if (
+    !(e.target instanceof HTMLElement || e.target instanceof SVGGraphicsElement)
+  )
+    return
+
+  const parent = e.target.closest(`[data-${prop}]`)
+
+  return (parent as HTMLElement)?.dataset?.[prop]
+}

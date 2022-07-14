@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type SyntheticEvent } from 'react'
 
 export type ButtonProps = Component & {
   pressed?: boolean
@@ -20,11 +20,11 @@ export const Button = ({
   ...rest
 }: ButtonProps) => {
   const [isPressed, setIsPressed] = useState(pressed)
-  const handleClick = () => {
+  const handleClick = (e: SyntheticEvent) => {
     if (disabled) return
 
     setIsPressed(!isPressed)
-    onClick?.()
+    onClick?.(e)
   }
 
   return (
