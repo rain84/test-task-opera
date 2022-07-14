@@ -6,4 +6,7 @@ declare type Component = {
   children?: React.ReactNode
   key?: string
 }
-declare type Fn<T = SyntheticEvent> = (props: T) => void
+declare type Fn<T1 = SyntheticEvent, T2 = unknown> = (
+  props1: T1,
+  props2: T2
+) => void

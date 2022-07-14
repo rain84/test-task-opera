@@ -1,13 +1,17 @@
 import { useState, type SyntheticEvent } from 'react'
 
-export type ButtonProps = Component & {
+export type ButtonState = {
   pressed?: boolean
-  pressedClassName?: string
-  releasedClassName?: string
-
   disabled?: boolean
-  onClick?: Fn
 }
+
+export type ButtonProps = Component &
+  ButtonState & {
+    pressedClassName?: string
+    releasedClassName?: string
+
+    onClick?: Fn<SyntheticEvent, ButtonState>
+  }
 
 export const Button = ({
   className,
@@ -24,7 +28,7 @@ export const Button = ({
     if (disabled) return
 
     setIsPressed(!isPressed)
-    onClick?.(e)
+    onClick?.(e, { pressed: !isPressed, disabled })
   }
 
   return (
