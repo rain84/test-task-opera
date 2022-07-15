@@ -5,7 +5,7 @@ import { IconSofa, IconPot, IconBulb, IconBathtub } from 'ui/icon'
 import { getParentDatasetProp } from 'utils/misc'
 import { RoomProps } from './rooms.types'
 
-export const Rooms = () => {
+export const Rooms = ({ className = '' }: Component) => {
   const onClick = useRef<OnClick>((e, { pressed }) => {
     const label =
       (e?.currentTarget as HTMLElement)?.dataset?.label ??
@@ -15,7 +15,9 @@ export const Rooms = () => {
   }).current
 
   return (
-    <section className="flex py-2 overflow-x-scroll overscroll-contain scrollbar">
+    <section
+      className={`flex py-2 overflow-x-scroll overscroll-contain scrollbar ${className}`.trimEnd()}
+    >
       {
         //	prettier-ignore
         [
