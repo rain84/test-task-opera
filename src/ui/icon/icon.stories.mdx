@@ -1,249 +1,39 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
-import * as Icon from '.'
+import * as Icons from '.'
+// prettier-ignore
+const names = [
+	'Menu', 'Bathtub', 'BellOff', 'Bulb', 'Cog', 'Drop', 'Leaf', 'Podium', 'Pot', 'Snowflake', 'Sofa', 'Thermometer', 'Torchere', 'Settings',
+]
+const icon = (name) => {
+  const Component = Icons[`Icon${name}`]
+  return (
+    <div className="p-2 flex space-x-4">
+      <Component />
+      <Component className="icon-disabled" />
+      <Component className="icon-white bg-red" />
+      <Component className="icon-2x cursor-pointer hover:bg-selected" />
+    </div>
+  )
+}
 
 <Meta title="Icons" />
 
 # Icons
 
 <Canvas>
-  <Story name="All-in-One">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconMenu />
-      <Icon.IconMenu className="icon-disabled" />
-      <Icon.IconMenu className="icon-white bg-red" />
-      <Icon.IconMenu className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconBathtub />
-    	<Icon.IconBathtub className="icon-disabled" />
-    	<Icon.IconBathtub className="icon-white bg-red" />
-    	<Icon.IconBathtub className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconBellOff />
-    	<Icon.IconBellOff className="icon-disabled" />
-    	<Icon.IconBellOff className="icon-white bg-red" />
-    	<Icon.IconBellOff className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconBulb />
-    	<Icon.IconBulb className="icon-disabled" />
-    	<Icon.IconBulb className="icon-white bg-red" />
-    	<Icon.IconBulb className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconCog />
-    	<Icon.IconCog className="icon-disabled" />
-    	<Icon.IconCog className="icon-white bg-red" />
-    	<Icon.IconCog className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconDrop />
-    	<Icon.IconDrop className="icon-disabled" />
-    	<Icon.IconDrop className="icon-white bg-red" />
-    	<Icon.IconDrop className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconLeaf />
-    	<Icon.IconLeaf className="icon-disabled" />
-    	<Icon.IconLeaf className="icon-white bg-red" />
-    	<Icon.IconLeaf className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconPodium />
-    	<Icon.IconPodium className="icon-disabled" />
-    	<Icon.IconPodium className="icon-white bg-red" />
-    	<Icon.IconPodium className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconPot />
-    	<Icon.IconPot className="icon-disabled" />
-    	<Icon.IconPot className="icon-white bg-red" />
-    	<Icon.IconPot className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconSnowflake />
-    	<Icon.IconSnowflake className="icon-disabled" />
-    	<Icon.IconSnowflake className="icon-white bg-red" />
-    	<Icon.IconSnowflake className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconSofa />
-    	<Icon.IconSofa className="icon-disabled" />
-    	<Icon.IconSofa className="icon-white bg-red" />
-    	<Icon.IconSofa className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconThermometer />
-    	<Icon.IconThermometer className="icon-disabled" />
-    	<Icon.IconThermometer className="icon-white bg-red" />
-    	<Icon.IconThermometer className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconTorchere />
-    	<Icon.IconTorchere className="icon-disabled" />
-    	<Icon.IconTorchere className="icon-white bg-red" />
-    	<Icon.IconTorchere className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-    <div className="p-2 flex space-x-4">
-    	<Icon.IconTuning_knob />
-    	<Icon.IconTuning_knob className="icon-disabled" />
-    	<Icon.IconTuning_knob className="icon-white bg-red" />
-    	<Icon.IconTuning_knob className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Menu">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconMenu />
-      <Icon.IconMenu className="icon-disabled" />
-      <Icon.IconMenu className="icon-white bg-red" />
-      <Icon.IconMenu className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Bathtub">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconBathtub />
-      <Icon.IconBathtub className="icon-disabled" />
-      <Icon.IconBathtub className="icon-white bg-red" />
-      <Icon.IconBathtub className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="BellOff">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconBellOff />
-      <Icon.IconBellOff className="icon-disabled" />
-      <Icon.IconBellOff className="icon-white bg-red" />
-      <Icon.IconBellOff className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Bulb">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconBulb />
-      <Icon.IconBulb className="icon-disabled" />
-      <Icon.IconBulb className="icon-white bg-red" />
-      <Icon.IconBulb className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Cog">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconCog />
-      <Icon.IconCog className="icon-disabled" />
-      <Icon.IconCog className="icon-white bg-red" />
-      <Icon.IconCog className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Drop">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconDrop />
-      <Icon.IconDrop className="icon-disabled" />
-      <Icon.IconDrop className="icon-white bg-red" />
-      <Icon.IconDrop className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Leaf">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconLeaf />
-      <Icon.IconLeaf className="icon-disabled" />
-      <Icon.IconLeaf className="icon-white bg-red" />
-      <Icon.IconLeaf className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Podium">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconPodium />
-      <Icon.IconPodium className="icon-disabled" />
-      <Icon.IconPodium className="icon-white bg-red" />
-      <Icon.IconPodium className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Pot">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconPot />
-      <Icon.IconPot className="icon-disabled" />
-      <Icon.IconPot className="icon-white bg-red" />
-      <Icon.IconPot className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Snowflake">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconSnowflake />
-      <Icon.IconSnowflake className="icon-disabled" />
-      <Icon.IconSnowflake className="icon-white bg-red" />
-      <Icon.IconSnowflake className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Sofa">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconSofa />
-      <Icon.IconSofa className="icon-disabled" />
-      <Icon.IconSofa className="icon-white bg-red" />
-      <Icon.IconSofa className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Thermometer">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconThermometer />
-      <Icon.IconThermometer className="icon-disabled" />
-      <Icon.IconThermometer className="icon-white bg-red" />
-      <Icon.IconThermometer className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Torchere">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconTorchere />
-      <Icon.IconTorchere className="icon-disabled" />
-      <Icon.IconTorchere className="icon-white bg-red" />
-      <Icon.IconTorchere className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Tuning_knob">
-    <div className="p-2 flex space-x-4">
-      <Icon.IconTuning_knob />
-      <Icon.IconTuning_knob className="icon-disabled" />
-      <Icon.IconTuning_knob className="icon-white bg-red" />
-      <Icon.IconTuning_knob className="icon-2x cursor-pointer hover:bg-selected" />
-    </div>
-  </Story>
+  <Story name="All-in-One">{names.map(icon)}</Story>
+  <Story name="Menu">{icon('Menu')}</Story>
+  <Story name="Bathtub">{icon('Bathtub')}</Story>
+  <Story name="BellOff">{icon('BellOff')}</Story>
+  <Story name="Bulb">{icon('Bulb')}</Story>
+  <Story name="Cog">{icon('Cog')}</Story>
+  <Story name="Drop">{icon('Drop')}</Story>
+  <Story name="Leaf">{icon('Leaf')}</Story>
+  <Story name="Podium">{icon('Podium')}</Story>
+  <Story name="Pot">{icon('Pot')}</Story>
+  <Story name="Snowflake">{icon('Snowflake')}</Story>
+  <Story name="Sofa">{icon('Sofa')}</Story>
+  <Story name="Thermometer">{icon('Thermometer')}</Story>
+  <Story name="Torchere">{icon('Torchere')}</Story>
+  <Story name="Settings">{icon('Settings')}</Story>
 </Canvas>

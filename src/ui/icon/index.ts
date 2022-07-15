@@ -12,7 +12,7 @@ import { ReactComponent as SnowflakeSvg } from './svg/snowflake.svg'
 import { ReactComponent as SofaSvg } from './svg/sofa.svg'
 import { ReactComponent as ThermometerSvg } from './svg/thermometer.svg'
 import { ReactComponent as TorchereSvg } from './svg/torchere.svg'
-import { ReactComponent as Tuning_knobSvg } from './svg/tuning_knob.svg'
+import { ReactComponent as SettingsSvg } from './svg/settings.svg'
 
 export const IconMenu = Icon(MenuSvg)
 export const IconBathtub = Icon(BathtubSvg)
@@ -27,4 +27,4 @@ export const IconSnowflake = Icon(SnowflakeSvg)
 export const IconSofa = Icon(SofaSvg)
 export const IconThermometer = Icon(ThermometerSvg)
 export const IconTorchere = Icon(TorchereSvg)
-export const IconTuning_knob = Icon(Tuning_knobSvg)
+export const IconSettings = Icon(SettingsSvg)
