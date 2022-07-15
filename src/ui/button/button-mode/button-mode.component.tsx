@@ -1,4 +1,5 @@
-import { Button, type ButtonProps } from '../button.component'
+import { Button } from '../button.component'
+import { type ButtonProps } from '../button.types'
 
 export const ButtonMode = ({ className = '', ...props }: ButtonProps) => (
   <Button

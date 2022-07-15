@@ -1,17 +1,7 @@
-import { useState, type SyntheticEvent } from 'react'
+import { useState } from 'react'
+import type { MouseEventHandler } from 'react'
 
-export type ButtonState = {
-  pressed?: boolean
-  disabled?: boolean
-}
-
-export type ButtonProps = Component &
-  ButtonState & {
-    pressedClassName?: string
-    releasedClassName?: string
-
-    onClick?: Fn<SyntheticEvent, ButtonState>
-  }
+import { type ButtonProps } from './button.types'
 
 export const Button = ({
   className,
@@ -24,7 +14,7 @@ export const Button = ({
   ...rest
 }: ButtonProps) => {
   const [isPressed, setIsPressed] = useState(pressed)
-  const handleClick = (e: SyntheticEvent) => {
+  const handleClick: MouseEventHandler = (e) => {
     if (disabled) return
 
     setIsPressed(!isPressed)

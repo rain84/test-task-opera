@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
 
-import { Button } from './Button';
-import './header.css';
+import { Button } from './Button'
+import './header.css'
 
 type User = {
-  name: string;
-};
-
-interface HeaderProps {
-  user?: User;
-  onLogin: Fn;
-  onLogout: Fn;
-  onCreateAccount: Fn;
+  name: string
 }
 
+interface HeaderProps {
+  user?: User
+  onLogin: () => void
+  onLogout: () => void
+  onCreateAccount: () => void
+}
+//	prettier-ignore
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
   <header>
     <div className="wrapper">

@@ -6,7 +6,6 @@ declare type Component = {
   children?: React.ReactNode
   key?: string
 }
-
 declare type ExtendArgs<F extends (...args: any) => any, T extends any[]> = (
   ...args: [...Parameters<F>, ...T]
 ) => ReturnType<F>

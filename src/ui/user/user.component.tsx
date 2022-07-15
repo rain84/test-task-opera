@@ -1,7 +1,12 @@
 import { Dot } from './dot.component'
 import { ReactComponent as Avatar } from './avatar.svg'
+import { MouseEventHandler } from 'react'
 
-type Props = { className?: string; focus?: boolean; onClick?: Fn }
+type Props = {
+  className?: string
+  focus?: boolean
+  onClick?: MouseEventHandler
+}
 
 export const User = ({ className, focus = false, onClick }: Props) => (
   <section

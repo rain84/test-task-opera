@@ -14,7 +14,7 @@ export interface State {
 export type ErrorProps = {
   stack: ErrorStack
   reloadable: boolean
-  onClick: Fn
+  onClick: MouseEventHandler<HTMLButtonElement>
 }
 
 export type ComponentType<P extends {}> = {

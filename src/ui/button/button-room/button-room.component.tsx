@@ -1,4 +1,5 @@
-import { Button, type ButtonProps } from '../button.component'
+import { Button } from '../button.component'
+import { type ButtonProps } from '../button.types'
 
 export type Color = 'cyan' | 'blue' | 'orange' | 'magenta'
 export type ButtonColouredProps = ButtonProps & {

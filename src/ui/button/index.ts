@@ -1,4 +1,5 @@
 export * from './button.component'
+export * from './button.types'
 export * from './button-room'
 export * from './button-mode'
 export * from './button-usage'
