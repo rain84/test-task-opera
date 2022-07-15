@@ -1,9 +1,9 @@
 import { useRef, type ReactNode } from 'react'
 
-import { ButtonRoom, type Color } from 'ui/button'
+import { ButtonRoom, type Color, type OnClick } from 'ui/button'
 import { IconSofa, IconPot, IconBulb, IconBathtub } from 'ui/icon'
 import { getParentDatasetProp } from 'utils/misc'
-import { OnClick, RoomProps } from './rooms.types'
+import { RoomProps } from './rooms.types'
 
 export const Rooms = () => {
   const onClick = useRef<OnClick>((e, { pressed }) => {
@@ -11,7 +11,7 @@ export const Rooms = () => {
       (e?.currentTarget as HTMLElement)?.dataset?.label ??
       getParentDatasetProp(e, 'label') ??
       'Button'
-    alert(`${label} is ${pressed ? 'pressed' : 'released'}`)
+    alert(`${label} ${pressed ? 'pressed' : 'released'}`)
   }).current
 
   return (

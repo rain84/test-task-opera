@@ -1,7 +1,6 @@
-import type { ReactNode, SyntheticEvent } from 'react'
-import type { Color, ButtonState } from 'ui/button'
+import type { ReactNode } from 'react'
+import type { Color, OnClick } from 'ui/button'
 
-export type OnClick = Fn<SyntheticEvent, ButtonState>
 export type RoomProps = {
   color: Color
   temperature: number
