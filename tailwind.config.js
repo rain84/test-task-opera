@@ -11,13 +11,18 @@ module.exports = {
       },
     },
     colors: {
+      ...require('tailwindcss/colors'),
       primary: '#00D2DF',
+      bluegray: '#CEEEFB',
+      elevation: '#c4c4c4',
+      selected: 'rgba(0, 210, 223, 0.15)',
       green: '#00DF81',
       red: '#FF6174',
       white: '#fff',
-      elevation: '#c4c4c4',
-      selected: 'rgba(0, 210, 223, 0.15)',
     },
-    plugins: [],
+    plugins: [
+      require('@tailwindcss/typography'),
+      // ...
+    ],
   },
 }
