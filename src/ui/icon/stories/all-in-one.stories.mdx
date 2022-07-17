@@ -1,0 +1,26 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import * as Icons from '../'
+const icon = (name, i) => {
+  const Icon = Icons[name]
+  return (
+    <div className="p-2 flex space-x-4 hover:bg-elevation hover:bg-opacity-10 rounded-lg">
+      <div className="flex-0">{i + 1}.</div>
+      <div className="flex-1">
+        <pre>{`<${name} />`}</pre>
+      </div>
+      <div className="flex flex-1">
+        <Icon className="mr-2" />
+        <Icon className="icon-2x cursor-pointer hover:bg-selected mr-2" />
+        <Icon className="icon-white bg-red mr-2" />
+      </div>
+    </div>
+  )
+}
+
+<Meta title="Icons" />
+
+# Icons
+
+<Canvas>
+  <Story name="All-in-One">{Object.keys(Icons).map(icon)}</Story>
+</Canvas>

@@ -1,0 +1,28 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
+import { IconLeaf as Icon } from '../'
+
+<Meta
+  title="Icons"
+  component={Icon}
+  argTypes={{
+    className: {
+      control: 'text',
+    },
+  }}
+/>
+
+# IconLeaf
+
+export const Template = ({ className }) => (
+  <div className="flex p-2 space-x-4">
+    <Icon className={className} />
+    <Icon className="icon-medium cursor-pointer hover:bg-selected" />
+    <Icon className="icon-white bg-red" />
+  </div>
+)
+
+<Canvas>
+  <Story name="Leaf">{Template.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Leaf" />

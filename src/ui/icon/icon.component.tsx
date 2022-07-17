@@ -3,8 +3,7 @@ type RC = React.FunctionComponent<React.SVGProps<SVGSVGElement>> & {
     name?: string
   }
 }
-
-type Props = { className?: string; disabled?: boolean }
+type Props = { className?: string }
 
 export const Icon = (Component: RC) => {
   const HOC = ({ className = '' }: Props) => (
