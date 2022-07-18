@@ -1,13 +1,22 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
-
 import * as Icons from '../'
+const camelCase = /([A-Z]?[a-z-]+)/g
+const prepareUrl = (name) =>
+  `/?path=/story/icons--${name
+    .replace('Icon', '')
+    .match(camelCase)
+    .join('-')
+    .toLocaleLowerCase()}`
 const icon = (name, i) => {
   const Icon = Icons[name]
+  const onClick = () => ''
   return (
     <div className="p-2 flex space-x-4 hover:bg-elevation hover:bg-opacity-10 rounded-lg">
       <div className="flex-0">{i + 1}.</div>
       <div className="flex-1">
-        <pre>{`<${name} />`}</pre>
+        <a href={prepareUrl(name)}>
+          <pre onClick={onClick}>{`<${name} />`}</pre>
+        </a>
       </div>
       <div className="flex flex-1">
         <Icon className="mr-2" />
