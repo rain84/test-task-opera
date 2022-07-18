@@ -1,0 +1,35 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
+import { IconSnowflake, ButtonMode } from 'ui'
+import { Card } from '.'
+import { decorators } from 'config/storybook.tsx'
+
+<Meta title="Card" component={Card} decorators={decorators} />
+
+# Card for 'Mode'
+
+export const Template = (args) => (
+  <Card {...args}>
+    <ButtonMode
+      onClick={(e, { pressed }) =>
+        alert(`ButtonRoom ${pressed ? 'pressed' : 'released'}`)
+      }
+      className="mb-2"
+    >
+      <IconSnowflake className="fill-white" />
+    </ButtonMode>
+  </Card>
+)
+
+<Canvas withToolbar>
+  <Story
+    name="Card for \'Mode\'"
+    args={{
+      title: 'Cool air',
+      label: 'On',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable of={Card} />

@@ -1,10 +1,13 @@
 import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
+
+import { decorators } from 'config/storybook.tsx'
 import * as Icon from 'ui/icon'
 import { ButtonRoom } from './index.ts'
 
 <Meta
-  title="Buttons/ButtonRoom"
+  title="Buttons"
   component={ButtonRoom}
+  decorators={decorators}
   argTypes={{
     color: {
       name: 'color',
@@ -18,7 +21,7 @@ import { ButtonRoom } from './index.ts'
 # ButtonRoom
 
 export const Template = (args) => (
-  <div className="flex p-2 space-x-4">
+  <>
     <ButtonRoom {...args} color="cyan">
       <Icon.IconSofa className="fill-white" />
     </ButtonRoom>
@@ -34,12 +37,12 @@ export const Template = (args) => (
     <ButtonRoom {...args}>
       <Icon.IconCog className="fill-white" />
     </ButtonRoom>
-  </div>
+  </>
 )
 
-<Canvas>
+<Canvas withToolbar>
   <Story
-    name="Default"
+    name="ButtonRoom"
     args={{
       pressed: false,
       disabled: false,
@@ -50,4 +53,4 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-<ArgsTable story="Default" />
+<ArgsTable story="ButtonRoom" />

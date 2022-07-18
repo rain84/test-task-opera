@@ -8,4 +8,10 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+  previewTabs: { 'storybook/docs/panel': { index: -1 } },
 }

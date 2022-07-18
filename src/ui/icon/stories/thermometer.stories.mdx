@@ -1,9 +1,12 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
+
+import { decorators } from 'config/storybook'
 import { IconThermometer as Icon } from '../'
 
 <Meta
   title="Icons"
   component={Icon}
+  decorators={decorators}
   argTypes={{
     className: {
       control: 'text',
@@ -14,14 +17,14 @@ import { IconThermometer as Icon } from '../'
 # IconThermometer
 
 export const Template = ({ className }) => (
-  <div className="flex p-2 space-x-4">
+  <>
     <Icon className={className} />
     <Icon className="icon-medium cursor-pointer hover:bg-selected" />
     <Icon className="icon-white bg-red" />
-  </div>
+  </>
 )
 
-<Canvas>
+<Canvas withToolbar>
   <Story name="Thermometer">{Template.bind({})}</Story>
 </Canvas>
 

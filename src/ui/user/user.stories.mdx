@@ -1,15 +1,24 @@
-import { Canvas, Meta, Story } from '@storybook/addon-docs'
-import {User} from '.'
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
 
-<Meta title="User" />
+import { decorators } from 'config/storybook.tsx'
+import { User } from '.'
 
-# Icons
+<Meta title="User" decorators={decorators} />
 
-<Canvas>
-  <Story name="Default">
-    <div className="p-2 flex space-x-4 justify-center">
-      <User/>
-      <User focus/>
-    </div>
+# User
+
+export const Template = (args) => <User {...args} />
+
+<Canvas withToolbar>
+  <Story
+    name="User"
+    args={{
+      focus: false,
+      className: '',
+    }}
+  >
+    {Template.bind({})}
   </Story>
 </Canvas>
+
+<ArgsTable story="User" />

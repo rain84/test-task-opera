@@ -1,16 +1,11 @@
-import { useState, useRef, useDeferredValue } from 'react'
+import { useState } from 'react'
 import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
 
 import { IconLeaf } from 'ui/icon'
+import { decorators } from 'config/storybook.tsx'
 import { Tumbler } from './tumbler.component.tsx'
 
-<Meta
-  title="Tumbler"
-  component={Tumbler}
-  decorators={[
-    (story) => <div className="flex p-2 space-x-4 items-center">{story()}</div>,
-  ]}
-/>
+<Meta title="Tumbler" component={Tumbler} decorators={decorators} />
 
 # Toggle
 
@@ -27,9 +22,9 @@ export const Template = (args) => {
   )
 }
 
-<Canvas>
+<Canvas withToolbar>
   <Story
-    name="Default"
+    name="Tumbler"
     args={{
       min: 0,
       max: 30,
@@ -41,4 +36,4 @@ export const Template = (args) => {
   </Story>
 </Canvas>
 
-<ArgsTable story="Default" />
+<ArgsTable story="Tumbler" />

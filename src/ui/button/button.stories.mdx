@@ -1,20 +1,18 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
+
+import { decorators } from 'config/storybook.tsx'
 import * as Icon from 'ui/icon'
 import { Button } from './index.ts'
 
-<Meta title="Buttons/Button" component={Button} />
+<Meta title="Buttons" component={Button} decorators={decorators} />
 
 ## Bare `<Button/>` without any styles, borders, etc.
 
-export const Template = (args) => (
-  <div className="p-2 flex space-x-4">
-    <Button {...args}>Default Button</Button>
-  </div>
-)
+export const Template = (args) => <Button {...args}>Default Button</Button>
 
-<Canvas>
+<Canvas withToolbar>
   <Story
-    name="Default"
+    name="Base button"
     args={{
       pressed: false,
       disabled: false,
@@ -25,4 +23,4 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-<ArgsTable story="Default" />
+<ArgsTable story="Base button" />
