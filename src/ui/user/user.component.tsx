@@ -1,5 +1,5 @@
 import { Dot } from './dot.component'
-import { ReactComponent as Avatar } from './avatar.svg'
+import { ReactComponent as Avatar } from './avatar.min.svg'
 import { MouseEventHandler } from 'react'
 
 type Props = {
