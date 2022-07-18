@@ -65,9 +65,9 @@ code
   .icon
     box-sizing: content-box
     width: 20px
-    height: 20px
+    height: 16px
     border-radius: 8px
-    padding: 6px 8px
+    padding: 8px 6px
     fill: rgba(0, 0, 0, 0.6)
 
   [disabled].group:hover svg
@@ -88,7 +88,7 @@ code
   .icon-black svg
     fill: black
 
-  .icon-2x
+  .icon-medium
     transform: scale(1.5)
 
   .gradient-cyan
@@ -133,3 +133,13 @@ code
 
       &::-webkit-scrollbar-thumb
         background-color: withOpacity($color, $opacity)
+
+  [data-tooltip]
+    position: relative
+
+    &::after
+      content: attr(data-tooltip)
+      @apply absolute z-10 w-max pointer-events-none duration-500 border border-neutral-500 rounded-lg border-2 p-1 bg-opacity-0 opacity-0 left-0 top-14
+
+    &:hover::after
+      @apply opacity-90 bg-white
