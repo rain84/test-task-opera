@@ -28,10 +28,11 @@ export const Template = (args) => (
     args={{
       title: '19°C',
       label: 'Living room',
+      className: 'border p-5 rounded-lg',
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-<ArgsTable of={Card} />
+<ArgsTable story="Card for \'Room\'" />
