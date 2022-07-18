@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
 
 import { IconSnowflake, ButtonMode } from 'ui'
-import { Card } from '.'
+import { CardMode } from '.'
 import { decorators } from 'config/storybook.tsx'
 
 <Meta title="Card" component={Card} decorators={decorators} />
@@ -9,7 +9,7 @@ import { decorators } from 'config/storybook.tsx'
 # Card for 'Mode'
 
 export const Template = (args) => (
-  <Card {...args}>
+  <CardMode {...args}>
     <ButtonMode
       onClick={(e, { pressed }) =>
         alert(`ButtonRoom ${pressed ? 'pressed' : 'released'}`)
@@ -18,7 +18,7 @@ export const Template = (args) => (
     >
       <IconSnowflake className="group-hover:fill-primary" />
     </ButtonMode>
-  </Card>
+  </CardMode>
 )
 
 <Canvas withToolbar>
