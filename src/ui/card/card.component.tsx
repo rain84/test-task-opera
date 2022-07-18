@@ -9,7 +9,7 @@ export type CardProps = {
 
 export const Card = ({ className = '', title, label, children }: CardProps) => (
   <div
-    className={`flex flex-col items-center justify-center first:ml-[28px] mr-[34px] last:mr-[28px] ${className}`.trimEnd()}
+    className={`flex flex-col items-center justify-center ${className}`.trimEnd()}
   >
     {children}
     {title && <p className="text-subtitle-bold">{title}</p>}
