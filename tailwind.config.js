@@ -13,7 +13,7 @@ module.exports = {
     colors: {
       ...require('tailwindcss/colors'),
       primary: '#00D2DF',
-      bluegray: '#CEEEFB',
+      bluegray: 'rgb(206 238 251 / 15%)',
       elevation: '#c4c4c4',
       selected: 'rgba(0, 210, 223, 0.15)',
       green: '#00DF81',
