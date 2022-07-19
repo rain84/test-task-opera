@@ -1,0 +1,18 @@
+import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
+
+import { decorators } from 'config/storybook.tsx'
+import { Modes } from './modes.component'
+
+<Meta title="Layout" component={Modes} decorators={decorators} />
+
+# Layout / Modes
+
+export const Template = (args) => <Modes {...args} />
+
+<Canvas withToolbar>
+  <Story name="Modes" args={{ className: 'rounded-lg elevation-big border' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Modes" />
