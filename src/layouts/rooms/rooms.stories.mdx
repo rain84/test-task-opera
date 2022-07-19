@@ -1,21 +1,16 @@
 import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
 
+import { decorators } from 'config/storybook.tsx'
 import { Rooms } from './rooms.component'
 
-<Meta title="Layout/Rooms" component={Rooms} />
+<Meta title="Layout" component={Rooms} decorators={decorators} />
 
-# Layout/Rooms
+# Layout / Rooms
 
-export const Template = (args) => {
-  return (
-    <div className="w-[360px] elevation-big">
-      <Rooms />
-    </div>
-  )
-}
+export const Template = (args) => <Rooms className="w-[360px] elevation-big" />
 
-<Canvas>
-  <Story name="Default">{Template.bind({})}</Story>
+<Canvas withToolbar>
+  <Story name="Rooms">{Template.bind({})}</Story>
 </Canvas>
 
-<ArgsTable story="Default" />
+<ArgsTable story="Rooms" />

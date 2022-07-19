@@ -1,9 +1,20 @@
 import { useRef, type ReactNode } from 'react'
 
-import { ButtonRoom, type Color, type OnClick } from 'ui/button'
+import type { Color, OnClick } from 'ui/button'
 import { IconSofa, IconPot, IconBulb, IconBathtub } from 'ui/icon'
+import { CardRoom } from 'ui'
 import { getParentDatasetProp } from 'utils/misc'
-import { RoomProps } from './rooms.types'
+
+const cards = [
+  item('cyan', 19, 'Living room', <IconSofa className="fill-white" />),
+  item('blue', 21, 'Kitchen', <IconPot className="fill-white" />),
+  item('orange', 19, 'Bedroom', <IconBulb className="fill-white" />),
+  item('magenta', 22, 'Bathroom', <IconBathtub className="fill-white" />),
+  item('cyan', 19, 'Living room', <IconSofa className="fill-white" />),
+  item('blue', 21, 'Kitchen', <IconPot className="fill-white" />),
+  item('orange', 19, 'Bedroom', <IconBulb className="fill-white" />),
+  item('magenta', 22, 'Bathroom', <IconBathtub className="fill-white" />),
+]
 
 export const Rooms = ({ className = '' }: Component) => {
   const onClick = useRef<OnClick>((e, { pressed }) => {
@@ -18,42 +29,15 @@ export const Rooms = ({ className = '' }: Component) => {
     <section
       className={`flex py-2 overflow-x-scroll overscroll-contain scrollbar ${className}`.trimEnd()}
     >
-      {
-        //	prettier-ignore
-        [
-        	item( 'cyan', 19, 'Living room', <IconSofa className="fill-white" />, onClick),
-        	item( 'blue', 21, 'Kitchen', <IconPot className="fill-white" />, onClick),
-        	item( 'orange', 19, 'Bedroom', <IconBulb className="fill-white" />, onClick),
-        	item( 'magenta', 22, 'Bathroom', <IconBathtub className="fill-white" />, onClick),
-        	item( 'cyan', 19, 'Living room', <IconSofa className="fill-white" />, onClick),
-        	item( 'blue', 21, 'Kitchen', <IconPot className="fill-white" />, onClick),
-        	item( 'orange', 19, 'Bedroom', <IconBulb className="fill-white" />, onClick),
-        	item( 'magenta', 22, 'Bathroom', <IconBathtub className="fill-white" />, onClick),
-				].map((props, i) => <Room {...props} key={props.label + i} />)
-      }
+      {cards.map((props, i) => (
+        <CardRoom {...props} key={props.label + i} onClick={onClick} />
+      ))}
     </section>
   )
 }
 
-function Room({ color, temperature, label, Icon, onClick }: RoomProps) {
-  return (
-    <div className="flex flex-col items-center justify-center first:ml-[28px] mr-[34px] last:mr-[28px]">
-      <ButtonRoom
-        color={color}
-        onClick={onClick}
-        className="mb-2"
-        data-label={label}
-      >
-        {Icon}
-      </ButtonRoom>
-      <p className="text-subtitle-bold">{temperature}°C</p>
-      <p className="text-body whitespace-nowrap">{label}</p>
-    </div>
-  )
-}
-
-function item(...args: [Color, number, string, ReactNode, OnClick]) {
-  const [color, temperature, label, Icon, onClick] = args
+function item(...args: [Color, number, string, ReactNode]) {
+  const [color, temperature, label, icon] = args
   //	prettier-ignore
-  return { color, temperature, label, Icon, onClick, }
+  return { color, temperature, label, icon, }
 }
