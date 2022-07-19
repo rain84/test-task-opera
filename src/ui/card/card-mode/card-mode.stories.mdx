@@ -1,24 +1,29 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
 
-import { IconSnowflake, ButtonMode } from 'ui'
+import { IconSnowflake } from 'ui'
 import { CardMode } from '.'
 import { decorators } from 'config/storybook.tsx'
 
-<Meta title="Card" component={Card} decorators={decorators} />
+<Meta
+  title="Card"
+  component={CardMode}
+  decorators={decorators}
+  argTypes={{
+    icon: { table: { disable: true } },
+    label: { table: { disable: true } },
+    onClick: { table: { disable: true } },
+  }}
+/>
 
 # Card for 'Mode'
 
 export const Template = (args) => (
-  <CardMode {...args}>
-    <ButtonMode
-      onClick={(e, { pressed }) =>
-        alert(`ButtonRoom ${pressed ? 'pressed' : 'released'}`)
-      }
-      className="mb-2 group"
-    >
-      <IconSnowflake className="group-hover:fill-primary" />
-    </ButtonMode>
-  </CardMode>
+  <CardMode
+    {...args}
+    key={args.title}
+    icon={IconSnowflake}
+    className={`mr-[34px] last:mr-0 ${args.className}`}
+  />
 )
 
 <Canvas withToolbar>
@@ -26,7 +31,8 @@ export const Template = (args) => (
     name="Card for \'Mode\'"
     args={{
       title: 'Cool air',
-      label: 'On',
+      pressed: false,
+      onClick: (_, state) => alert(JSON.stringify(state, null, ' ')),
       className: 'border p-5 rounded-lg',
     }}
   >
