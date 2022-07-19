@@ -21,7 +21,7 @@ describe('Utils', () => {
         nodes[2] = nodes[0].children[1] as SVGElement
       })
 
-      it('should have svg-nodes ', () => {
+      it('should have svg-nodes', () => {
         expect(nodes[0]?.tagName).toBe('svg')
         expect(nodes[1]?.tagName).toBe('circle')
         expect(nodes[2]?.tagName).toBe('circle')
