@@ -5,11 +5,12 @@ import { Card, type CardProps } from '../'
 
 export type CardModeProps = CardProps & {
   icon: Function
+  pressed?: boolean
   onClick?: OnClick
 }
 
 export const CardMode = ({ onClick, icon: Icon, ...props }: CardModeProps) => {
-  const [pressed, setPressed] = useState(false)
+  const [pressed, setPressed] = useState(props.pressed)
   const cb: OnClick = useCallback(
     (e, state) => {
       setPressed(state.pressed ?? false)
@@ -20,7 +21,7 @@ export const CardMode = ({ onClick, icon: Icon, ...props }: CardModeProps) => {
 
   return (
     <Card {...props} label={pressed ? 'On' : 'Off'}>
-      <ButtonMode onClick={cb} className="mb-2 group" pressed>
+      <ButtonMode {...props} onClick={cb} className="mb-2 group">
         <Icon className="group-hover:fill-primary" />
       </ButtonMode>
     </Card>
