@@ -7,10 +7,17 @@ import { Rooms } from './rooms.component'
 
 # Layout / Rooms
 
-export const Template = (args) => <Rooms className="w-[360px] elevation-big" />
+export const Template = (args) => (
+  <Rooms className={`w-[360px] ${args.className}`} />
+)
 
 <Canvas withToolbar>
-  <Story name="Rooms">{Template.bind({})}</Story>
+  <Story
+    name="Rooms"
+    args={{ className: 'w-[360px] rounded-lg elevation-big border' }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 <ArgsTable story="Rooms" />

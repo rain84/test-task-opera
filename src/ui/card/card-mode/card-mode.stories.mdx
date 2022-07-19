@@ -5,7 +5,7 @@ import { CardMode } from '.'
 import { decorators } from 'config/storybook.tsx'
 
 <Meta
-  title="Card"
+  title="UI/Card"
   component={CardMode}
   decorators={decorators}
   argTypes={{
@@ -15,7 +15,7 @@ import { decorators } from 'config/storybook.tsx'
   }}
 />
 
-# Card for 'Mode'
+# UI / Card / CardMode
 
 export const Template = (args) => (
   <CardMode
@@ -28,7 +28,7 @@ export const Template = (args) => (
 
 <Canvas withToolbar>
   <Story
-    name="Card for \'Mode\'"
+    name="CardMode"
     args={{
       title: 'Cool air',
       pressed: false,
@@ -40,4 +40,4 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-<ArgsTable story="Card for \'Mode\'" />
+<ArgsTable story="CardMode" />

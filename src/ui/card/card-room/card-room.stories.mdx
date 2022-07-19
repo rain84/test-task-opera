@@ -1,33 +1,40 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
 
 import { IconSofa, ButtonRoom } from 'ui'
-import { Card } from '.'
+import { CardRoom } from '.'
 import { decorators } from 'config/storybook.tsx'
 
-<Meta title="Card" component={Card} decorators={decorators} />
+<Meta
+  title="UI/Card"
+  component={CardRoom}
+  decorators={decorators}
+  argTypes={{
+    icon: { table: { disable: true } },
+    onClick: { table: { disable: true } },
+  }}
+/>
 
-# Card for 'Room'
+# UI / Card / CardRoom
 
 export const Template = (args) => (
-  <Card {...args}>
-    <ButtonRoom
-      color="magenta"
-      onClick={(e, { pressed }) =>
-        alert(`ButtonRoom ${pressed ? 'pressed' : 'released'}`)
-      }
-      className="mb-2"
-    >
-      <IconSofa className="fill-white" />
-    </ButtonRoom>
-  </Card>
+  <CardRoom
+    {...args}
+    icon={<IconSofa className="fill-white" />}
+    className={args.className}
+    onClick={(e, { pressed }) =>
+      alert(`ButtonRoom ${pressed ? 'pressed' : 'released'}`)
+    }
+  />
 )
 
 <Canvas withToolbar>
   <Story
-    name="Card for \'Room\'"
+    name="CardRoom"
     args={{
-      title: '19°C',
+      color: 'magenta',
+      title: '19 °C',
       label: 'Living room',
+      pressed: false,
       className: 'border p-5 rounded-lg',
     }}
   >
@@ -35,4 +42,4 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-<ArgsTable story="Card for \'Room\'" />
+<ArgsTable story="CardRoom" />

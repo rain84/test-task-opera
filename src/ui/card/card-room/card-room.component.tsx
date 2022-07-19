@@ -5,30 +5,21 @@ import type { ReactNode } from 'react'
 export type CardRoomProps = CardProps & {
   icon: ReactNode
   color: Color
-  temperature: number
   pressed?: boolean
   onClick?: OnClick
 }
 
 export const CardRoom = ({
   icon: Icon,
-  temperature,
-  color,
-  label,
-  onClick,
+  className = '',
+  ...props
 }: CardRoomProps) => {
   return (
     <Card
-      title={`${temperature}°C`}
-      label={label}
-      className="first:ml-[28px] mr-[34px] last:mr-[28px]"
+      {...props}
+      className={`first:ml-[28px] mr-[34px] last:mr-[28px] ${className}`.trimEnd()}
     >
-      <ButtonRoom
-        color={color}
-        onClick={onClick}
-        data-label={label}
-        className="mb-2"
-      >
+      <ButtonRoom {...props} data-label={props.label} className="mb-2">
         {Icon}
       </ButtonRoom>
     </Card>

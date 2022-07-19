@@ -29,8 +29,13 @@ export const Rooms = ({ className = '' }: Component) => {
     <section
       className={`flex py-2 overflow-x-scroll overscroll-contain scrollbar ${className}`.trimEnd()}
     >
-      {cards.map((props, i) => (
-        <CardRoom {...props} key={props.label + i} onClick={onClick} />
+      {cards.map(({ temperature, ...props }, i) => (
+        <CardRoom
+          {...props}
+          title={`${temperature} °C`}
+          key={props.label + i}
+          onClick={onClick}
+        />
       ))}
     </section>
   )
