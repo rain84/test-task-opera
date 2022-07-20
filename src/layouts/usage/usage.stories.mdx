@@ -1,0 +1,22 @@
+import { Canvas, Story, Meta, ArgsTable } from '@storybook/addon-docs'
+
+import { decorators, className } from 'config/storybook.tsx'
+import { Usage } from './usage.component'
+
+<Meta title="Layout/Usage" component={Usage} decorators={decorators} />
+
+# Layout / Usage
+
+export const Template = (args) => (
+  <div className={`w-[360px] ${args.className}`}>
+    <Usage />
+  </div>
+)
+
+<Canvas>
+  <Story name="Usage" args={{ className }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Usage" />

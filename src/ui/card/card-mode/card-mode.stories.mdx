@@ -2,7 +2,7 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
 
 import { IconSnowflake } from 'ui'
 import { CardMode } from '.'
-import { decorators } from 'config/storybook.tsx'
+import { decorators, className } from 'config/storybook.tsx'
 
 <Meta
   title="UI/Card"
@@ -33,7 +33,7 @@ export const Template = (args) => (
       title: 'Cool air',
       pressed: false,
       onClick: (_, state) => alert(JSON.stringify(state, null, ' ')),
-      className: 'border p-5 rounded-lg',
+      className: `${className} p-5`,
     }}
   >
     {Template.bind({})}

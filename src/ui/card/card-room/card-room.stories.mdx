@@ -2,7 +2,7 @@ import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
 
 import { IconSofa, ButtonRoom } from 'ui'
 import { CardRoom } from '.'
-import { decorators } from 'config/storybook.tsx'
+import { decorators, className } from 'config/storybook.tsx'
 
 <Meta
   title="UI/Card"
@@ -35,7 +35,7 @@ export const Template = (args) => (
       title: '19 °C',
       label: 'Living room',
       pressed: false,
-      className: 'border p-5 rounded-lg',
+      className: `${className} p-5`,
     }}
   >
     {Template.bind({})}
