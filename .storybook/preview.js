@@ -1,3 +1,4 @@
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import {} from '../src/style.sass'
 
 export const parameters = {
@@ -14,4 +15,16 @@ export const parameters = {
     },
   },
   previewTabs: { 'storybook/docs/panel': { index: -1 } },
+  viewport: {
+    viewports: {
+      Mobile: {
+        name: 'Mobile (360x720)',
+        type: 'mobile',
+        styles: {
+          width: '360px',
+          height: '720px',
+        },
+      },
+    },
+  },
 }
