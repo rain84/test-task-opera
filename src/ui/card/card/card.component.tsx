@@ -13,6 +13,8 @@ export const Card = ({ className = '', title, label, children }: CardProps) => (
   >
     {children}
     {title && <p className="text-subtitle-bold">{title}</p>}
-    {label && <p className="text-body whitespace-nowrap opacity-40">{label}</p>}
+    {label && (
+      <p className="text-body text-low-emphasis whitespace-nowrap">{label}</p>
+    )}
   </div>
 )

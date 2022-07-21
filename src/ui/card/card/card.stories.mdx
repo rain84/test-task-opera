@@ -1,0 +1,27 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
+
+import { IconSofa } from 'ui'
+import { Card } from '.'
+import { decorators, className } from 'config/storybook.tsx'
+
+<Meta title="UI/Card" component={Card} decorators={decorators} />
+
+# UI / Card / Base Card
+
+export const Template = (args) => <Card {...args}></Card>
+
+<Canvas withToolbar>
+  <Story
+    name="Card"
+    args={{
+      title: 'Title',
+      label: 'Label',
+      className: `${className} p-5`,
+      children: <IconSofa className="fill-red" />,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Card" />
