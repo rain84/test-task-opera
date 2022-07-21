@@ -21,46 +21,59 @@ code
   .page
     @apply bg-white rounded-3xl w-[var(--app-width)] h-[var(--app-height)] flex flex-col justify-between items-stretch
 
-  .elevation-big
-    box-shadow: 0px 8px 32px rgba(3, 78, 120, 0.1)
+  .elevation
+    &-big
+      box-shadow: 0px 8px 32px rgba(3, 78, 120, 0.1)
+    &-small
+      box-shadow: 0px 6px 18px rgba(3, 78, 120, 0.15)
+    &-inner
+      box-shadow: inset 0px 4px 10px rgba(190, 200, 216, 0.5)
 
-  .elevation-small
-    box-shadow: 0px 6px 18px rgba(3, 78, 120, 0.15)
-
-  .elevation-inner
-    box-shadow: inset 0px 4px 10px rgba(190, 200, 216, 0.5)
-
-  .text-app-title
-    font-weight: 800
-    font-size: 24px
-    line-height: 32px
-
-  .text-subtitle-bold
-    font-weight: 800
-    font-size: 16px
-    line-height: 24px
-
-  .text-subtitle
-    font-weight: 400
-    font-size: 16px
-    line-height: 24px
-
-  .text-body
-    font-weight: 400
-    font-size: 14px
-    line-height: 20px
-
-  .text-overline
-    font-weight: 600
-    font-size: 11px
-    line-height: 20px
-    letter-spacing: 2px
-    text-transform: uppercase
-
-  .text-title-big
-    font-weight: 800
-    font-size: 32px
-    line-height: 40px
+  .text
+    &-app-title
+      font-family: 'Lato'
+      font-style: normal
+      font-weight: 800
+      font-size: 24px
+      line-height: 32px
+      color: #000000
+    &-subtitle-1-bold
+      font-family: 'Lato'
+      font-style: normal
+      font-weight: 800
+      font-size: 16px
+      line-height: 24px
+      color: #000000
+    &-subtitle-1
+      font-family: 'Lato'
+      font-style: normal
+      font-weight: 400
+      font-size: 16px
+      line-height: 24px
+      color: #000000
+    &-body
+      font-family: 'Lato'
+      font-style: normal
+      font-weight: 400
+      font-size: 14px
+      line-height: 20px
+      color: #000000
+    &-overline
+      font-family: 'Lato'
+      font-style: normal
+      font-weight: 600
+      font-size: 11px
+      line-height: 20px
+      letter-spacing: 2px
+      text-transform: uppercase
+      color: #000000
+    &-big-title
+      font-family: 'Lato'
+      font-style: normal
+      font-weight: 800
+      font-size: 32px
+      line-height: 40px
+      color: #000000
 
   .icon
     box-sizing: content-box
@@ -68,40 +81,23 @@ code
     height: 16px
     border-radius: 8px
     padding: 8px 6px
-    fill: rgba(0, 0, 0, 0.6)
 
-  [disabled].group:hover svg
-    fill: rgba(0, 0, 0, 0.6)
+    &-white,&-white svg
+      fill: white
+    &-black,&-black svg
+      fill: black
+    &-medium
+      transform: scale(1.5)
 
-  [disabled]
-    @apply hover:border-none
-
-  /* :hover:not[disabled].icon, :hover:not[disabled] .icon
-   fill: #00d2df
-   */
-
-  .icon-white,
-  .icon-white svg
-    fill: white
-
-  .icon-black,
-  .icon-black svg
-    fill: black
-
-  .icon-medium
-    transform: scale(1.5)
-
-  .gradient-cyan
-    background: linear-gradient(160.35deg, #00ebc1 7.95%, #00bdc9 92.76%)
-
-  .gradient-blue
-    background: linear-gradient(160.35deg, #26c8fc 7.95%, #5e76f5 92.76%)
-
-  .gradient-orange
-    background: linear-gradient(160.35deg, #ffd875 7.95%, #f43d53 92.76%)
-
-  .gradient-magenta
-    background: linear-gradient(160.35deg, #fc6fff 7.95%, #af3df4 92.76%)
+  .gradient
+    &-cyan
+      background: linear-gradient(160.35deg, #00ebc1 7.95%, #00bdc9 92.76%)
+    &-blue
+      background: linear-gradient(160.35deg, #26c8fc 7.95%, #5e76f5 92.76%)
+    &-orange
+      background: linear-gradient(160.35deg, #ffd875 7.95%, #f43d53 92.76%)
+    &-magenta
+      background: linear-gradient(160.35deg, #fc6fff 7.95%, #af3df4 92.76%)
 
   .scrollbar
     --size: 5px
@@ -143,3 +139,12 @@ code
 
     &:hover::after
       @apply opacity-90 bg-white
+
+  [disabled].group:hover svg
+    fill: rgba(0, 0, 0, 0.6)
+
+  [disabled]
+    @apply hover:border-none
+
+  // :hover:not[disabled].icon, :hover:not[disabled] .icon
+  //  fill: #00d2df

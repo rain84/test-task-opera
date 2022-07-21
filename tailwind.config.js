@@ -19,6 +19,9 @@ module.exports = {
       green: '#00DF81',
       red: '#FF6174',
       white: '#fff',
+      'medium-emphasis': 'rgba(0, 0, 0, 0.6)',
+      'high-emphasis': '#000',
+      'low-emphasis': 'rgba(0, 0, 0, 0.4)',
     },
     plugins: [
       require('@tailwindcss/typography'),
