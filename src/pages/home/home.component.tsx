@@ -1,14 +1,15 @@
-import { Header, Rooms, Modes } from 'layouts'
+import { Header, Rooms, Modes, Usage } from 'layouts'
 
 export const Home = () => (
   <div className="page">
     <Header />
-    <main className="flex-1 border-2 border-red">
+    <main className="flex-1">
       <Rooms />
-      <Modes />
+      <Usage />
+      {/* <Modes /> */}
     </main>
-    <footer className="border-2 border-green-600">
+    {/* <footer className="">
       <p>Footer</p>
-    </footer>
+    </footer> */}
   </div>
 )
