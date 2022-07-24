@@ -29,3 +29,8 @@ export const getParentDatasetProp = (e: React.SyntheticEvent, prop: string) => {
 
   return (parent as HTMLElement)?.dataset?.[prop]
 }
+
+export const omit = (obj: Record<string, any>, ...props: string[]) =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([key]) => !props.includes(key))
+  )
