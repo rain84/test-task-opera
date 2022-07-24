@@ -9,7 +9,6 @@ describe('Util', () => {
       svg = new SvgElement<SVGSVGElement>(
         document.createElementNS('http://www.w3.org/2000/svg', 'svg')
       )
-      console.log(svg)
     })
 
     it('should exist', () => {
