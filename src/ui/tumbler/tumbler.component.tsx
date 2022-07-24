@@ -23,6 +23,8 @@ export const Tumbler = ({
   max = 100,
   step = 1,
 
+  className,
+
   children,
   onChange,
 }: TumblerProps) => {
@@ -198,7 +200,9 @@ export const Tumbler = ({
   }, [step, cx, cy, max, onClick, value, ref])
 
   return (
-    <section className={`flex items-center justify-center w-[140px] h-[140px]`}>
+    <section
+      className={`flex items-center justify-center w-[140px] h-[140px] ${className}`.trimEnd()}
+    >
       <SvgComponent
         {...ref}
         className="absolute tumbler"

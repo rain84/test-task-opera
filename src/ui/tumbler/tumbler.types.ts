@@ -4,8 +4,7 @@ export type TumblerProps = Component & {
   max?: number
   step?: number
 
+  className?: string
+
   onChange?: (value: number) => void
 }
-
-type Arc = Record<'r' | 'length' | 'step' | 'width', number>
-type Arcs = Record<'inner' | 'outer', Arc>
