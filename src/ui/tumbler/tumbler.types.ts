@@ -1,4 +1,4 @@
-export type TumblerProps = Component & {
+export type TumblerProps = ComponentProps & {
   initialValue?: number
   min?: number
   max?: number

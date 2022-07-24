@@ -7,7 +7,7 @@ export type ButtonState = {
 
 export type OnClick = ExtendArgs<MouseEventHandler, [ButtonState]>
 
-export type ButtonProps = Component &
+export type ButtonProps = ComponentProps &
   ButtonState & {
     pressedClassName?: string
     releasedClassName?: string

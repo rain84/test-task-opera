@@ -1,6 +1,6 @@
 import { RefObject, type MouseEventHandler } from 'react'
 
-type Props = Component &
+type Props = ComponentProps &
   Record<
     'ctx' | 'backgroundOuter' | 'backgroundInner' | 'arcOuter' | 'arcInner',
     RefObject<SVGSVGElement | SVGCircleElement>

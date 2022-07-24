@@ -5,7 +5,7 @@ import { IconThermometer, IconDrop, IconLeaf } from 'ui/icon'
 import { Tumbler, CardUsage } from 'ui'
 import { getParentDatasetProp } from 'utils/misc'
 
-export const Usage = ({ className = '' }: Component) => {
+export const Usage = ({ className = '' }: ComponentProps) => {
   const onClick = useRef<OnClick>((e, { pressed }) => {
     const label =
       (e?.currentTarget as HTMLElement)?.dataset?.label ??

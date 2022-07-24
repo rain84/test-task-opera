@@ -16,7 +16,7 @@ const cards = [
   item('magenta', 22, 'Bathroom', <IconBathtub className="fill-white" />),
 ]
 
-export const Rooms = ({ className = '' }: Component) => {
+export const Rooms = ({ className = '' }: ComponentProps) => {
   const onClick = useRef<OnClick>((e, { pressed }) => {
     const label =
       (e?.currentTarget as HTMLElement)?.dataset?.label ??

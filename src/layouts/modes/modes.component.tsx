@@ -10,7 +10,7 @@ const cards: [string, Function, boolean][] = [
   ['Silent', IconBellOff, false],
 ]
 
-export const Modes = ({ className = '' }: Component) => {
+export const Modes = ({ className = '' }: ComponentProps) => {
   const onClick = useRef<MouseEventHandler>((e) => {
     const label =
       (e?.currentTarget as HTMLElement)?.dataset?.label ??
