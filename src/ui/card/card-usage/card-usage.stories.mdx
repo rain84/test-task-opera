@@ -1,0 +1,36 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs'
+
+import { IconThermometer } from 'ui'
+import { CardUsage } from '.'
+import { decorators, className } from 'config/storybook.tsx'
+
+<Meta
+  title="UI/Card"
+  component={CardUsage}
+  decorators={decorators}
+  argTypes={{
+    icon: { table: { disable: true } },
+    label: { table: { disable: true } },
+    onClick: { table: { disable: true } },
+  }}
+/>
+
+# UI / Card / CardUsage
+
+export const Template = (args) => <CardUsage {...args} icon={IconThermometer} />
+
+<Canvas withToolbar>
+  <Story
+    name="CardUsage"
+    args={{
+      title: '21°C',
+      pressed: false,
+      onClick: (_, state) => alert(JSON.stringify(state, null, ' ')),
+      className: `${className} p-5`,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="CardUsage" />
