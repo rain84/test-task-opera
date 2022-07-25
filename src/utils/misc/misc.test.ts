@@ -93,5 +93,21 @@ describe('Utils', () => {
         expect(omit(obj, 'a', 'b', 'c')).toMatchObject({})
       })
     })
+
+    describe('filterClassName', () => {
+      it('should work', () => {
+        const className =
+          'w-[8px] h-[8px] top-1 right-1 absolute z-10 bg-red animate-pulse'
+        expect(filterClassName()).toBe('')
+        expect(filterClassName(className)).toBe(className)
+        expect(filterClassName(className, 'non-existent')).toBe(className)
+        expect(filterClassName(className, 'bg-red', 'animate-pulse')).toBe(
+          'w-[8px] h-[8px] top-1 right-1 absolute z-10'
+        )
+        expect(filterClassName(className, 'bg', 'animate')).toBe(
+          'w-[8px] h-[8px] top-1 right-1 absolute z-10'
+        )
+      })
+    })
   })
 })

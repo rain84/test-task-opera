@@ -34,3 +34,9 @@ export const omit = (obj: Record<string, any>, ...props: string[]) =>
   Object.fromEntries(
     Object.entries(obj).filter(([key]) => !props.includes(key))
   )
+
+export const filterClassName = (className = '', ...classes: string[]) =>
+  className
+    .split(/\s+/)
+    .filter((cn) => !classes.find((c) => cn.includes(c)))
+    .join(' ')
