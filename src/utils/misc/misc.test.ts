@@ -1,4 +1,4 @@
-import { addEventListeners, canProcess, omit } from './misc'
+import { addEventListeners, canProcess, omit, filterClassName } from './misc'
 
 describe('Utils', () => {
   describe('Misc', () => {
@@ -12,38 +12,47 @@ describe('Utils', () => {
     	</circle>
     	</svg>
     	`.trim()
+
       const nodes: MaybeUndefined<SVGElement>[] = []
+
       beforeEach(() => {
         nodes[0] = document.body.children[0] as SVGElement
         nodes[1] = nodes[0].children[0] as SVGElement
         nodes[2] = nodes[0].children[1] as SVGElement
       })
+
       it('should have svg-nodes', () => {
         expect(nodes[0]?.tagName).toBe('svg')
         expect(nodes[1]?.tagName).toBe('circle')
         expect(nodes[2]?.tagName).toBe('circle')
       })
+
       it('addEventListeners', () => {
         expect(typeof addEventListeners([]) === 'function').toBeTruthy()
+
         const onClick = jest.fn()
         const onMouseDown = jest.fn()
         const unsubscribe = addEventListeners([
           ['click', onClick, ...nodes],
           ['mousedown', onMouseDown, ...nodes],
         ])
+
         nodes.forEach((node) =>
           ['click', 'mousedown'].forEach((type) =>
             node?.dispatchEvent(new MouseEvent(type))
           )
         )
+
         expect(onClick.mock.calls.length).toBe(3)
         expect(onMouseDown.mock.calls.length).toBe(3)
+
         const removeEventListener = jest.fn()
         nodes.forEach(
           (node) => (node!.removeEventListener = removeEventListener)
         )
         unsubscribe()
         const { results, calls } = removeEventListener.mock
+
         expect(calls.length).toBe(6)
         expect(
           calls.every(
@@ -55,14 +64,17 @@ describe('Utils', () => {
         expect(results.every((res) => res.type === 'return')).toBeTruthy()
       })
     })
+
     describe('canProcess', () => {
       it('should work', () => {
         const truthyObject = {
           prop1: 'val1',
           prop2: 'val2',
         }
+
         expect(canProcess({})).toBeTruthy()
         expect(canProcess(truthyObject)).toBeTruthy()
+
         const falsyObject = {
           prop1: null,
           prop2: 'val2',
@@ -71,6 +83,7 @@ describe('Utils', () => {
         expect(canProcess(falsyObject)).not.toBeTruthy()
       })
     })
+
     describe('omit', () => {
       it('should work', () => {
         const obj = { a: 1, b: 2, c: 3 }
